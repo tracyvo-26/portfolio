@@ -1,0 +1,1799 @@
+--- Starting Integrated Test Case ---
+
+--- Module 1: Hospital Graph Setup ---
+--- Adding Departments ---
+Department 'Emergency' added.
+Department 'ICU' added.
+Department 'Pharmacy' added.
+Department 'Radiology' added.
+Department 'Laboratories' added.
+Department 'Operating Theatres' added.
+Department 'Wards' added.
+Department 'Outpatient Units' added.
+Path added between 'Emergency' and 'Radiology', travel time: 10 minutes.
+Path added between 'Radiology' and 'Laboratories', travel time: 8 minutes.
+Path added between 'Laboratories' and 'Emergency', travel time: 12 minutes.
+Path added between 'Laboratories' and 'Pharmacy', travel time: 5 minutes.
+Path added between 'Laboratories' and 'ICU', travel time: 2 minutes.
+Path added between 'Laboratories' and 'Wards', travel time: 5 minutes.
+Path added between 'Pharmacy' and 'ICU', travel time: 7 minutes.
+Path added between 'ICU' and 'Wards', travel time: 9 minutes.
+Path added between 'Wards' and 'Pharmacy', travel time: 6 minutes.
+Path added between 'ICU' and 'Operating Theatres', travel time: 4 minutes.
+Path added between 'Radiology' and 'Wards', travel time: 15 minutes.
+
+Hospital Paths (Adjacency List):
+Emergency -> Radiology (10 min), Laboratories (12 min)
+ICU -> Laboratories (2 min), Pharmacy (7 min), Wards (9 min), Operating Theatres (4 min)
+Pharmacy -> Laboratories (5 min), ICU (7 min), Wards (6 min)
+Radiology -> Emergency (10 min), Laboratories (8 min), Wards (15 min)
+Laboratories -> Radiology (8 min), Emergency (12 min), Pharmacy (5 min), ICU (2 min), Wards (5 min)
+Operating Theatres -> ICU (4 min)
+Wards -> Laboratories (5 min), ICU (9 min), Pharmacy (6 min), Radiology (15 min)
+Outpatient Units -> 
+There are 8 departments in the hospital.
+Total departments: 8
+There are 11 paths connected between hospital departments
+Total paths: 11
+
+--- Module 2: Patient Management System (Hash Table) Setup ---
+Initialized hash table with size 211.
+
+--- Module 3: Patient Priority Heap Setup ---
+Heap initialized with capacity 20.
+
+--- Processing Patient Data from CSV and Integrating Modules ---
+
+Processing row 1: Alice Smith (ID: 1)...
+  Calculated Expected Treatment Time for Patient ID 1: 44.0 min (Travel: 14, Proc: 30.0)
+  Insert for ID 1. Probe sequence: [57]
+  Patient ID 1 inserted successfully at index 57.
+  Patient ID 1 successfully added to hash table as Under Treatment with ETT 44.0.
+
+  Log: Calculating Priority for Patient ID 1 (U=1, Current='Emergency', Dest='ICU', ProcTime=30.0)...
+  Log: Module 1 returned travel time: 14 minutes for path: Emergency -> Laboratories -> ICU.
+  Log: Final Priority (U=1, T_travel=14, T_proc=30.0): 27.73
+  Log: Inserted: Patient ID 1 (Prio: 27.73)
+  Patient ID 1 added to priority heap with priority: 27.73
+
+Processing row 2: Bob Johnson (ID: 2)...
+  Calculated Expected Treatment Time for Patient ID 2: 57.0 min (Travel: 7, Proc: 50.0)
+  Insert for ID 2. Probe sequence: [114]
+  Patient ID 2 inserted successfully at index 114.
+  Patient ID 2 successfully added to hash table as Under Treatment with ETT 57.0.
+
+  Log: Calculating Priority for Patient ID 2 (U=2, Current='ICU', Dest='Wards', ProcTime=50.0)...
+  Log: Module 1 returned travel time: 7 minutes for path: ICU -> Laboratories -> Wards.
+  Log: Final Priority (U=2, T_travel=7, T_proc=50.0): 21.54
+  Log: Inserted: Patient ID 2 (Prio: 21.54)
+  Patient ID 2 added to priority heap with priority: 21.54
+
+Processing row 3: Charlie Brown (ID: 3)...
+  Calculated Expected Treatment Time for Patient ID 3: 67.0 min (Travel: 7, Proc: 60.0)
+  Insert for ID 3. Probe sequence: [171]
+  Patient ID 3 inserted successfully at index 171.
+  Patient ID 3 successfully added to hash table as Under Treatment with ETT 67.0.
+
+  Log: Calculating Priority for Patient ID 3 (U=3, Current='Wards', Dest='ICU', ProcTime=60.0)...
+  Log: Module 1 returned travel time: 7 minutes for path: Wards -> Laboratories -> ICU.
+  Log: Final Priority (U=3, T_travel=7, T_proc=60.0): 17.93
+  Log: Inserted: Patient ID 3 (Prio: 17.93)
+  Patient ID 3 added to priority heap with priority: 17.93
+
+Processing row 4: Diana Prince (ID: 4)...
+  Calculated Expected Treatment Time for Patient ID 4: 50.0 min (Travel: 10, Proc: 40.0)
+  Insert for ID 4. Probe sequence: [17]
+  Patient ID 4 inserted successfully at index 17.
+  Patient ID 4 successfully added to hash table as Under Treatment with ETT 50.0.
+
+  Log: Calculating Priority for Patient ID 4 (U=2, Current='Radiology', Dest='ICU', ProcTime=40.0)...
+  Log: Module 1 returned travel time: 10 minutes for path: Radiology -> Laboratories -> ICU.
+  Log: Final Priority (U=2, T_travel=10, T_proc=40.0): 24.00
+  Log: Inserted: Patient ID 4 (Prio: 24.00)
+  Patient ID 4 added to priority heap with priority: 24.00
+
+Processing row 5: Eve Adams (ID: 5)...
+  Calculated Expected Treatment Time for Patient ID 5: 87.0 min (Travel: 7, Proc: 80.0)
+  Insert for ID 5. Probe sequence: [74]
+  Patient ID 5 inserted successfully at index 74.
+  Patient ID 5 successfully added to hash table as Under Treatment with ETT 87.0.
+
+  Log: Calculating Priority for Patient ID 5 (U=4, Current='Pharmacy', Dest='ICU', ProcTime=80.0)...
+  Log: Module 1 returned travel time: 7 minutes for path: Pharmacy -> ICU.
+  Log: Final Priority (U=4, T_travel=7, T_proc=80.0): 13.49
+  Log: Inserted: Patient ID 5 (Prio: 13.49)
+  Patient ID 5 added to priority heap with priority: 13.49
+
+Processing row 6: Frank White (ID: 6)...
+  Calculated Expected Treatment Time for Patient ID 6: 42.0 min (Travel: 2, Proc: 40.0)
+  Insert for ID 6. Probe sequence: [131]
+  Patient ID 6 inserted successfully at index 131.
+  Patient ID 6 successfully added to hash table as Under Treatment with ETT 42.0.
+
+  Log: Calculating Priority for Patient ID 6 (U=5, Current='Laboratories', Dest='ICU', ProcTime=40.0)...
+  Log: Module 1 returned travel time: 2 minutes for path: Laboratories -> ICU.
+  Log: Final Priority (U=5, T_travel=2, T_proc=40.0): 24.81
+  Log: Inserted: Patient ID 6 (Prio: 24.81)
+  Patient ID 6 added to priority heap with priority: 24.81
+
+Processing row 7: Grace Hall (ID: 7)...
+  Calculated Expected Treatment Time for Patient ID 7: 34.0 min (Travel: 4, Proc: 30.0)
+  Insert for ID 7. Probe sequence: [188]
+  Patient ID 7 inserted successfully at index 188.
+  Patient ID 7 successfully added to hash table as Under Treatment with ETT 34.0.
+
+  Log: Calculating Priority for Patient ID 7 (U=1, Current='Operating Theatres', Dest='ICU', ProcTime=30.0)...
+  Log: Module 1 returned travel time: 4 minutes for path: Operating Theatres -> ICU.
+  Log: Final Priority (U=1, T_travel=4, T_proc=30.0): 34.41
+  Log: Inserted: Patient ID 7 (Prio: 34.41)
+  Patient ID 7 added to priority heap with priority: 34.41
+
+Processing row 8: Henry Green (ID: 8)...
+
+No path found from 'Outpatient Units' to 'ICU'.
+  Warning: No path found for Patient ID 8 from Outpatient Units to ICU. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 8: 60.0 min (Travel: 0, Proc: 60.0)
+  Insert for ID 8. Probe sequence: [34]
+  Patient ID 8 inserted successfully at index 34.
+  Patient ID 8 successfully added to hash table as Under Treatment with ETT 60.0.
+
+  Log: Calculating Priority for Patient ID 8 (U=3, Current='Outpatient Units', Dest='ICU', ProcTime=60.0)...
+
+No path found from 'Outpatient Units' to 'ICU'.
+  Log: No path found from Outpatient Units to ICU. Defaulting travel time to 0.
+  Log: Final Priority (U=3, T_travel=0, T_proc=60.0): 19.67
+  Log: Inserted: Patient ID 8 (Prio: 19.67)
+  Patient ID 8 added to priority heap with priority: 19.67
+
+Processing row 9: Ivy Black (ID: 9)...
+  Insert for ID 9. Probe sequence: [91]
+  Patient ID 9 inserted successfully at index 91.
+  Patient ID 9 successfully added to hash table as Completed with ETT None.
+  Patient ID 9 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 9 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 10: Jack Blue (ID: 10)...
+  Calculated Expected Treatment Time for Patient ID 10: 32.0 min (Travel: 2, Proc: 30.0)
+  Insert for ID 10. Probe sequence: [148]
+  Patient ID 10 inserted successfully at index 148.
+  Patient ID 10 successfully added to hash table as Under Treatment with ETT 32.0.
+
+  Log: Calculating Priority for Patient ID 10 (U=1, Current='ICU', Dest='Laboratories', ProcTime=30.0)...
+  Log: Module 1 returned travel time: 2 minutes for path: ICU -> Laboratories.
+  Log: Final Priority (U=1, T_travel=2, T_proc=30.0): 36.25
+  Log: Inserted: Patient ID 10 (Prio: 36.25)
+  Patient ID 10 added to priority heap with priority: 36.25
+
+Processing row 11: Karen Grey (ID: 11)...
+  Calculated Expected Treatment Time for Patient ID 11: 95.0 min (Travel: 5, Proc: 90.0)
+  Insert for ID 11. Probe sequence: [205]
+  Patient ID 11 inserted successfully at index 205.
+  Patient ID 11 successfully added to hash table as Under Treatment with ETT 95.0.
+
+  Log: Calculating Priority for Patient ID 11 (U=4, Current='Wards', Dest='Laboratories', ProcTime=90.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Wards -> Laboratories.
+  Log: Final Priority (U=4, T_travel=5, T_proc=90.0): 12.53
+  Log: Inserted: Patient ID 11 (Prio: 12.53)
+  Patient ID 11 added to priority heap with priority: 12.53
+
+Processing row 12: Liam Red (ID: 12)...
+  Calculated Expected Treatment Time for Patient ID 12: 28.0 min (Travel: 8, Proc: 20.0)
+  Insert for ID 12. Probe sequence: [51]
+  Patient ID 12 inserted successfully at index 51.
+  Patient ID 12 successfully added to hash table as Under Treatment with ETT 28.0.
+
+  Log: Calculating Priority for Patient ID 12 (U=3, Current='Radiology', Dest='Laboratories', ProcTime=20.0)...
+  Log: Module 1 returned travel time: 8 minutes for path: Radiology -> Laboratories.
+  Log: Final Priority (U=3, T_travel=8, T_proc=20.0): 38.71
+  Log: Inserted: Patient ID 12 (Prio: 38.71)
+  Patient ID 12 added to priority heap with priority: 38.71
+
+Processing row 13: Mia Violet (ID: 13)...
+  Calculated Expected Treatment Time for Patient ID 13: 55.0 min (Travel: 5, Proc: 50.0)
+  Insert for ID 13. Probe sequence: [108]
+  Patient ID 13 inserted successfully at index 108.
+  Patient ID 13 successfully added to hash table as Under Treatment with ETT 55.0.
+
+  Log: Calculating Priority for Patient ID 13 (U=2, Current='Pharmacy', Dest='Laboratories', ProcTime=50.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Pharmacy -> Laboratories.
+  Log: Final Priority (U=2, T_travel=5, T_proc=50.0): 22.18
+  Log: Inserted: Patient ID 13 (Prio: 22.18)
+  Patient ID 13 added to priority heap with priority: 22.18
+
+Processing row 14: Noah Orange (ID: 14)...
+  Calculated Expected Treatment Time for Patient ID 14: 72.0 min (Travel: 12, Proc: 60.0)
+  Insert for ID 14. Probe sequence: [165]
+  Patient ID 14 inserted successfully at index 165.
+  Patient ID 14 successfully added to hash table as Under Treatment with ETT 72.0.
+
+  Log: Calculating Priority for Patient ID 14 (U=5, Current='Laboratories', Dest='Emergency', ProcTime=60.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Laboratories -> Emergency.
+  Log: Final Priority (U=5, T_travel=12, T_proc=60.0): 14.89
+  Log: Inserted: Patient ID 14 (Prio: 14.89)
+  Patient ID 14 added to priority heap with priority: 14.89
+
+Processing row 15: Olivia Yellow (ID: 15)...
+  Calculated Expected Treatment Time for Patient ID 15: 78.0 min (Travel: 18, Proc: 60.0)
+  Insert for ID 15. Probe sequence: [11]
+  Patient ID 15 inserted successfully at index 11.
+  Patient ID 15 successfully added to hash table as Under Treatment with ETT 78.0.
+
+  Log: Calculating Priority for Patient ID 15 (U=1, Current='Operating Theatres', Dest='Emergency', ProcTime=60.0)...
+  Log: Module 1 returned travel time: 18 minutes for path: Operating Theatres -> ICU -> Laboratories -> Emergency.
+  Log: Final Priority (U=1, T_travel=18, T_proc=60.0): 17.82
+  Log: Inserted: Patient ID 15 (Prio: 17.82)
+  Patient ID 15 added to priority heap with priority: 17.82
+
+Processing row 16: Peter Pink (ID: 16)...
+
+No path found from 'Outpatient Units' to 'Emergency'.
+  Warning: No path found for Patient ID 16 from Outpatient Units to Emergency. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 16: 30.0 min (Travel: 0, Proc: 30.0)
+  Insert for ID 16. Probe sequence: [68]
+  Patient ID 16 inserted successfully at index 68.
+  Patient ID 16 successfully added to hash table as Under Treatment with ETT 30.0.
+
+  Log: Calculating Priority for Patient ID 16 (U=3, Current='Outpatient Units', Dest='Emergency', ProcTime=30.0)...
+
+No path found from 'Outpatient Units' to 'Emergency'.
+  Log: No path found from Outpatient Units to Emergency. Defaulting travel time to 0.
+  Log: Final Priority (U=3, T_travel=0, T_proc=30.0): 36.33
+  Log: Inserted: Patient ID 16 (Prio: 36.33)
+  Patient ID 16 added to priority heap with priority: 36.33
+
+Processing row 17: Quinn Teal (ID: 17)...
+  Calculated Expected Treatment Time for Patient ID 17: 130.0 min (Travel: 10, Proc: 120.0)
+  Insert for ID 17. Probe sequence: [125]
+  Patient ID 17 inserted successfully at index 125.
+  Patient ID 17 successfully added to hash table as Under Treatment with ETT 130.0.
+
+  Log: Calculating Priority for Patient ID 17 (U=2, Current='Emergency', Dest='Radiology', ProcTime=120.0)...
+  Log: Module 1 returned travel time: 10 minutes for path: Emergency -> Radiology.
+  Log: Final Priority (U=2, T_travel=10, T_proc=120.0): 11.69
+  Log: Inserted: Patient ID 17 (Prio: 11.69)
+  Patient ID 17 added to priority heap with priority: 11.69
+
+Processing row 18: Rachel Cyan (ID: 18)...
+  Insert for ID 18. Probe sequence: [182]
+  Patient ID 18 inserted successfully at index 182.
+  Patient ID 18 successfully added to hash table as Completed with ETT None.
+  Patient ID 18 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 18 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 19: Sam Magenta (ID: 19)...
+  Calculated Expected Treatment Time for Patient ID 19: 133.0 min (Travel: 13, Proc: 120.0)
+  Insert for ID 19. Probe sequence: [28]
+  Patient ID 19 inserted successfully at index 28.
+  Patient ID 19 successfully added to hash table as Under Treatment with ETT 133.0.
+
+  Log: Calculating Priority for Patient ID 19 (U=1, Current='Wards', Dest='Radiology', ProcTime=120.0)...
+  Log: Module 1 returned travel time: 13 minutes for path: Wards -> Laboratories -> Radiology.
+  Log: Final Priority (U=1, T_travel=13, T_proc=120.0): 12.52
+  Log: Inserted: Patient ID 19 (Prio: 12.52)
+  Patient ID 19 added to priority heap with priority: 12.52
+
+Processing row 20: Tina Gold (ID: 20)...
+
+No path found from 'Radiology' to 'Outpatient Units'.
+  Warning: No path found for Patient ID 20 from Radiology to Outpatient Units. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 20: 120.0 min (Travel: 0, Proc: 120.0)
+  Insert for ID 20. Probe sequence: [85]
+  Patient ID 20 inserted successfully at index 85.
+  Patient ID 20 successfully added to hash table as Under Treatment with ETT 120.0.
+
+  Log: Calculating Priority for Patient ID 20 (U=3, Current='Radiology', Dest='Outpatient Units', ProcTime=120.0)...
+
+No path found from 'Radiology' to 'Outpatient Units'.
+  Log: No path found from Radiology to Outpatient Units. Defaulting travel time to 0.
+  Log: Final Priority (U=3, T_travel=0, T_proc=120.0): 11.33
+  Log: Inserted: Patient ID 20 (Prio: 11.33)
+  Patient ID 20 added to priority heap with priority: 11.33
+
+Processing row 21: Uma Silver (ID: 21)...
+  Calculated Expected Treatment Time for Patient ID 21: 313.0 min (Travel: 13, Proc: 300.0)
+  Insert for ID 21. Probe sequence: [142]
+  Patient ID 21 inserted successfully at index 142.
+  Patient ID 21 successfully added to hash table as Under Treatment with ETT 313.0.
+
+  Log: Calculating Priority for Patient ID 21 (U=5, Current='Pharmacy', Dest='Radiology', ProcTime=300.0)...
+  Log: Module 1 returned travel time: 13 minutes for path: Pharmacy -> Laboratories -> Radiology.
+  Log: Final Priority (U=5, T_travel=13, T_proc=300.0): 4.19
+  Log: Inserted: Patient ID 21 (Prio: 4.19)
+  Patient ID 21 added to priority heap with priority: 4.19
+
+Processing row 22: Victor Bronze (ID: 22)...
+  Calculated Expected Treatment Time for Patient ID 22: 128.0 min (Travel: 8, Proc: 120.0)
+  Insert for ID 22. Probe sequence: [199]
+  Patient ID 22 inserted successfully at index 199.
+  Patient ID 22 successfully added to hash table as Under Treatment with ETT 128.0.
+
+  Log: Calculating Priority for Patient ID 22 (U=2, Current='Laboratories', Dest='Radiology', ProcTime=120.0)...
+  Log: Module 1 returned travel time: 8 minutes for path: Laboratories -> Radiology.
+  Log: Final Priority (U=2, T_travel=8, T_proc=120.0): 11.81
+  Log: Inserted: Patient ID 22 (Prio: 11.81)
+  Patient ID 22 added to priority heap with priority: 11.81
+
+Processing row 23: Wendy Pearl (ID: 23)...
+  Calculated Expected Treatment Time for Patient ID 23: 114.0 min (Travel: 14, Proc: 100.0)
+  Insert for ID 23. Probe sequence: [45]
+  Patient ID 23 inserted successfully at index 45.
+  Patient ID 23 successfully added to hash table as Under Treatment with ETT 114.0.
+
+  Log: Calculating Priority for Patient ID 23 (U=4, Current='Operating Theatres', Dest='Radiology', ProcTime=100.0)...
+  Log: Module 1 returned travel time: 14 minutes for path: Operating Theatres -> ICU -> Laboratories -> Radiology.
+  Log: Final Priority (U=4, T_travel=14, T_proc=100.0): 10.77
+  Heap capacity reached, resizing heap...
+  Heap resized to capacity: 40
+  Log: Inserted: Patient ID 23 (Prio: 10.77)
+  Patient ID 23 added to priority heap with priority: 10.77
+
+Processing row 24: Xavier Ruby (ID: 24)...
+
+No path found from 'Outpatient Units' to 'Radiology'.
+  Warning: No path found for Patient ID 24 from Outpatient Units to Radiology. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 24: 70.0 min (Travel: 0, Proc: 70.0)
+  Insert for ID 24. Probe sequence: [102]
+  Patient ID 24 inserted successfully at index 102.
+  Patient ID 24 successfully added to hash table as Under Treatment with ETT 70.0.
+
+  Log: Calculating Priority for Patient ID 24 (U=1, Current='Outpatient Units', Dest='Radiology', ProcTime=70.0)...
+
+No path found from 'Outpatient Units' to 'Radiology'.
+  Log: No path found from Outpatient Units to Radiology. Defaulting travel time to 0.
+  Log: Final Priority (U=1, T_travel=0, T_proc=70.0): 19.29
+  Log: Inserted: Patient ID 24 (Prio: 19.29)
+  Patient ID 24 added to priority heap with priority: 19.29
+
+Processing row 25: Yara Sapphire (ID: 25)...
+
+No path found from 'Emergency' to 'Outpatient Units'.
+  Warning: No path found for Patient ID 25 from Emergency to Outpatient Units. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 25: 40.0 min (Travel: 0, Proc: 40.0)
+  Insert for ID 25. Probe sequence: [159]
+  Patient ID 25 inserted successfully at index 159.
+  Patient ID 25 successfully added to hash table as Under Treatment with ETT 40.0.
+
+  Log: Calculating Priority for Patient ID 25 (U=3, Current='Emergency', Dest='Outpatient Units', ProcTime=40.0)...
+
+No path found from 'Emergency' to 'Outpatient Units'.
+  Log: No path found from Emergency to Outpatient Units. Defaulting travel time to 0.
+  Log: Final Priority (U=3, T_travel=0, T_proc=40.0): 28.00
+  Log: Inserted: Patient ID 25 (Prio: 28.00)
+  Patient ID 25 added to priority heap with priority: 28.00
+
+Processing row 26: Zane Emerald (ID: 26)...
+  Insert for ID 26. Probe sequence: [5]
+  Patient ID 26 inserted successfully at index 5.
+  Patient ID 26 successfully added to hash table as Completed with ETT None.
+  Patient ID 26 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 26 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 27: Amy Amethyst (ID: 27)...
+
+No path found from 'Wards' to 'Outpatient Units'.
+  Warning: No path found for Patient ID 27 from Wards to Outpatient Units. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 27: 80.0 min (Travel: 0, Proc: 80.0)
+  Insert for ID 27. Probe sequence: [62]
+  Patient ID 27 inserted successfully at index 62.
+  Patient ID 27 successfully added to hash table as Under Treatment with ETT 80.0.
+
+  Log: Calculating Priority for Patient ID 27 (U=2, Current='Wards', Dest='Outpatient Units', ProcTime=80.0)...
+
+No path found from 'Wards' to 'Outpatient Units'.
+  Log: No path found from Wards to Outpatient Units. Defaulting travel time to 0.
+  Log: Final Priority (U=2, T_travel=0, T_proc=80.0): 16.50
+  Log: Inserted: Patient ID 27 (Prio: 16.50)
+  Patient ID 27 added to priority heap with priority: 16.50
+
+Processing row 28: Ben Beryl (ID: 28)...
+
+No path found from 'Radiology' to 'Outpatient Units'.
+  Warning: No path found for Patient ID 28 from Radiology to Outpatient Units. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 28: 80.0 min (Travel: 0, Proc: 80.0)
+  Insert for ID 28. Probe sequence: [119]
+  Patient ID 28 inserted successfully at index 119.
+  Patient ID 28 successfully added to hash table as Under Treatment with ETT 80.0.
+
+  Log: Calculating Priority for Patient ID 28 (U=4, Current='Radiology', Dest='Outpatient Units', ProcTime=80.0)...
+
+No path found from 'Radiology' to 'Outpatient Units'.
+  Log: No path found from Radiology to Outpatient Units. Defaulting travel time to 0.
+  Log: Final Priority (U=4, T_travel=0, T_proc=80.0): 14.50
+  Log: Inserted: Patient ID 28 (Prio: 14.50)
+  Patient ID 28 added to priority heap with priority: 14.50
+
+Processing row 29: Chloe Citrine (ID: 29)...
+
+No path found from 'Pharmacy' to 'Outpatient Units'.
+  Warning: No path found for Patient ID 29 from Pharmacy to Outpatient Units. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 29: 110.0 min (Travel: 0, Proc: 110.0)
+  Insert for ID 29. Probe sequence: [176]
+  Patient ID 29 inserted successfully at index 176.
+  Patient ID 29 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 29 (U=1, Current='Pharmacy', Dest='Outpatient Units', ProcTime=110.0)...
+
+No path found from 'Pharmacy' to 'Outpatient Units'.
+  Log: No path found from Pharmacy to Outpatient Units. Defaulting travel time to 0.
+  Log: Final Priority (U=1, T_travel=0, T_proc=110.0): 14.09
+  Log: Inserted: Patient ID 29 (Prio: 14.09)
+  Patient ID 29 added to priority heap with priority: 14.09
+
+Processing row 30: David Diamond (ID: 30)...
+
+No path found from 'Laboratories' to 'Outpatient Units'.
+  Warning: No path found for Patient ID 30 from Laboratories to Outpatient Units. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 30: 120.0 min (Travel: 0, Proc: 120.0)
+  Insert for ID 30. Probe sequence: [22]
+  Patient ID 30 inserted successfully at index 22.
+  Patient ID 30 successfully added to hash table as Under Treatment with ETT 120.0.
+
+  Log: Calculating Priority for Patient ID 30 (U=3, Current='Laboratories', Dest='Outpatient Units', ProcTime=120.0)...
+
+No path found from 'Laboratories' to 'Outpatient Units'.
+  Log: No path found from Laboratories to Outpatient Units. Defaulting travel time to 0.
+  Log: Final Priority (U=3, T_travel=0, T_proc=120.0): 11.33
+  Log: Inserted: Patient ID 30 (Prio: 11.33)
+  Patient ID 30 added to priority heap with priority: 11.33
+
+Processing row 31: Ella Garnet (ID: 31)...
+
+No path found from 'Operating Theatres' to 'Outpatient Units'.
+  Warning: No path found for Patient ID 31 from Operating Theatres to Outpatient Units. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 31: 50.0 min (Travel: 0, Proc: 50.0)
+  Insert for ID 31. Probe sequence: [79]
+  Patient ID 31 inserted successfully at index 79.
+  Patient ID 31 successfully added to hash table as Under Treatment with ETT 50.0.
+
+  Log: Calculating Priority for Patient ID 31 (U=5, Current='Operating Theatres', Dest='Outpatient Units', ProcTime=50.0)...
+
+No path found from 'Operating Theatres' to 'Outpatient Units'.
+  Log: No path found from Operating Theatres to Outpatient Units. Defaulting travel time to 0.
+  Log: Final Priority (U=5, T_travel=0, T_proc=50.0): 21.00
+  Log: Inserted: Patient ID 31 (Prio: 21.00)
+  Patient ID 31 added to priority heap with priority: 21.00
+
+Processing row 32: Finn Jade (ID: 32)...
+
+No path found from 'Outpatient Units' to 'Operating Theatres'.
+  Warning: No path found for Patient ID 32 from Outpatient Units to Operating Theatres. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 32: 40.0 min (Travel: 0, Proc: 40.0)
+  Insert for ID 32. Probe sequence: [136]
+  Patient ID 32 inserted successfully at index 136.
+  Patient ID 32 successfully added to hash table as Under Treatment with ETT 40.0.
+
+  Log: Calculating Priority for Patient ID 32 (U=2, Current='Outpatient Units', Dest='Operating Theatres', ProcTime=40.0)...
+
+No path found from 'Outpatient Units' to 'Operating Theatres'.
+  Log: No path found from Outpatient Units to Operating Theatres. Defaulting travel time to 0.
+  Log: Final Priority (U=2, T_travel=0, T_proc=40.0): 29.00
+  Log: Inserted: Patient ID 32 (Prio: 29.00)
+  Patient ID 32 added to priority heap with priority: 29.00
+
+Processing row 33: Gia Opal (ID: 33)...
+  Calculated Expected Treatment Time for Patient ID 33: 48.0 min (Travel: 18, Proc: 30.0)
+  Insert for ID 33. Probe sequence: [193]
+  Patient ID 33 inserted successfully at index 193.
+  Patient ID 33 successfully added to hash table as Under Treatment with ETT 48.0.
+
+  Log: Calculating Priority for Patient ID 33 (U=4, Current='Emergency', Dest='Operating Theatres', ProcTime=30.0)...
+  Log: Module 1 returned travel time: 18 minutes for path: Emergency -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=4, T_travel=18, T_proc=30.0): 22.83
+  Log: Inserted: Patient ID 33 (Prio: 22.83)
+  Patient ID 33 added to priority heap with priority: 22.83
+
+Processing row 34: Harry Peridot (ID: 34)...
+  Calculated Expected Treatment Time for Patient ID 34: 54.0 min (Travel: 4, Proc: 50.0)
+  Insert for ID 34. Probe sequence: [39]
+  Patient ID 34 inserted successfully at index 39.
+  Patient ID 34 successfully added to hash table as Under Treatment with ETT 54.0.
+
+  Log: Calculating Priority for Patient ID 34 (U=1, Current='ICU', Dest='Operating Theatres', ProcTime=50.0)...
+  Log: Module 1 returned travel time: 4 minutes for path: ICU -> Operating Theatres.
+  Log: Final Priority (U=1, T_travel=4, T_proc=50.0): 23.52
+  Log: Inserted: Patient ID 34 (Prio: 23.52)
+  Patient ID 34 added to priority heap with priority: 23.52
+
+Processing row 35: Isla Quartz (ID: 35)...
+  Calculated Expected Treatment Time for Patient ID 35: 31.0 min (Travel: 11, Proc: 20.0)
+  Insert for ID 35. Probe sequence: [96]
+  Patient ID 35 inserted successfully at index 96.
+  Patient ID 35 successfully added to hash table as Under Treatment with ETT 31.0.
+
+  Log: Calculating Priority for Patient ID 35 (U=3, Current='Wards', Dest='Operating Theatres', ProcTime=20.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Wards -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=3, T_travel=11, T_proc=20.0): 35.26
+  Log: Inserted: Patient ID 35 (Prio: 35.26)
+  Patient ID 35 added to priority heap with priority: 35.26
+
+Processing row 36: Jake Ruby (ID: 36)...
+  Calculated Expected Treatment Time for Patient ID 36: 134.0 min (Travel: 14, Proc: 120.0)
+  Insert for ID 36. Probe sequence: [153]
+  Patient ID 36 inserted successfully at index 153.
+  Patient ID 36 successfully added to hash table as Under Treatment with ETT 134.0.
+
+  Log: Calculating Priority for Patient ID 36 (U=5, Current='Radiology', Dest='Operating Theatres', ProcTime=120.0)...
+  Log: Module 1 returned travel time: 14 minutes for path: Radiology -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=5, T_travel=14, T_proc=120.0): 8.46
+  Log: Inserted: Patient ID 36 (Prio: 8.46)
+  Patient ID 36 added to priority heap with priority: 8.46
+
+Processing row 37: Kira Sapphire (ID: 37)...
+  Calculated Expected Treatment Time for Patient ID 37: 131.0 min (Travel: 11, Proc: 120.0)
+  Insert for ID 37. Probe sequence: [210]
+  Patient ID 37 inserted successfully at index 210.
+  Patient ID 37 successfully added to hash table as Under Treatment with ETT 131.0.
+
+  Log: Calculating Priority for Patient ID 37 (U=2, Current='Pharmacy', Dest='Operating Theatres', ProcTime=120.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Pharmacy -> ICU -> Operating Theatres.
+  Log: Final Priority (U=2, T_travel=11, T_proc=120.0): 11.63
+  Log: Inserted: Patient ID 37 (Prio: 11.63)
+  Patient ID 37 added to priority heap with priority: 11.63
+
+Processing row 38: Leo Topaz (ID: 38)...
+  Calculated Expected Treatment Time for Patient ID 38: 106.0 min (Travel: 6, Proc: 100.0)
+  Insert for ID 38. Probe sequence: [56]
+  Patient ID 38 inserted successfully at index 56.
+  Patient ID 38 successfully added to hash table as Under Treatment with ETT 106.0.
+
+  Log: Calculating Priority for Patient ID 38 (U=4, Current='Laboratories', Dest='Operating Theatres', ProcTime=100.0)...
+  Log: Module 1 returned travel time: 6 minutes for path: Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=4, T_travel=6, T_proc=100.0): 11.43
+  Log: Inserted: Patient ID 38 (Prio: 11.43)
+  Patient ID 38 added to priority heap with priority: 11.43
+
+Processing row 39: Maya Tourmaline (ID: 39)...
+  Calculated Expected Treatment Time for Patient ID 39: 104.0 min (Travel: 4, Proc: 100.0)
+  Insert for ID 39. Probe sequence: [113]
+  Patient ID 39 inserted successfully at index 113.
+  Patient ID 39 successfully added to hash table as Under Treatment with ETT 104.0.
+
+  Log: Calculating Priority for Patient ID 39 (U=1, Current='Operating Theatres', Dest='ICU', ProcTime=100.0)...
+  Log: Module 1 returned travel time: 4 minutes for path: Operating Theatres -> ICU.
+  Log: Final Priority (U=1, T_travel=4, T_proc=100.0): 14.62
+  Log: Inserted: Patient ID 39 (Prio: 14.62)
+  Patient ID 39 added to priority heap with priority: 14.62
+
+Processing row 40: Nico Turquoise (ID: 40)...
+  Insert for ID 40. Probe sequence: [170]
+  Patient ID 40 inserted successfully at index 170.
+  Patient ID 40 successfully added to hash table as Completed with ETT None.
+  Patient ID 40 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 40 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 41: Orla Zircon (ID: 41)...
+  Calculated Expected Treatment Time for Patient ID 41: 67.0 min (Travel: 12, Proc: 55.0)
+  Insert for ID 41. Probe sequence: [16]
+  Patient ID 41 inserted successfully at index 16.
+  Patient ID 41 successfully added to hash table as Under Treatment with ETT 67.0.
+
+  Log: Calculating Priority for Patient ID 41 (U=5, Current='Emergency', Dest='Laboratories', ProcTime=55.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Emergency -> Laboratories.
+  Log: Final Priority (U=5, T_travel=12, T_proc=55.0): 15.93
+  Log: Inserted: Patient ID 41 (Prio: 15.93)
+  Patient ID 41 added to priority heap with priority: 15.93
+
+Processing row 42: Pauline Agate (ID: 42)...
+  Calculated Expected Treatment Time for Patient ID 42: 107.0 min (Travel: 2, Proc: 105.0)
+  Insert for ID 42. Probe sequence: [73]
+  Patient ID 42 inserted successfully at index 73.
+  Patient ID 42 successfully added to hash table as Under Treatment with ETT 107.0.
+
+  Log: Calculating Priority for Patient ID 42 (U=2, Current='ICU', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 2 minutes for path: ICU -> Laboratories.
+  Log: Final Priority (U=2, T_travel=2, T_proc=105.0): 13.35
+  Log: Inserted: Patient ID 42 (Prio: 13.35)
+  Patient ID 42 added to priority heap with priority: 13.35
+
+Processing row 43: Quentin Amber (ID: 43)...
+  Calculated Expected Treatment Time for Patient ID 43: 110.0 min (Travel: 5, Proc: 105.0)
+  Insert for ID 43. Probe sequence: [130]
+  Patient ID 43 inserted successfully at index 130.
+  Patient ID 43 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 43 (U=4, Current='Wards', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Wards -> Laboratories.
+  Log: Final Priority (U=4, T_travel=5, T_proc=105.0): 11.09
+  Log: Inserted: Patient ID 43 (Prio: 11.09)
+  Patient ID 43 added to priority heap with priority: 11.09
+
+Processing row 44: Ria Aquamarine (ID: 44)...
+  Calculated Expected Treatment Time for Patient ID 44: 113.0 min (Travel: 8, Proc: 105.0)
+  Insert for ID 44. Probe sequence: [187]
+  Patient ID 44 inserted successfully at index 187.
+  Patient ID 44 successfully added to hash table as Under Treatment with ETT 113.0.
+
+  Log: Calculating Priority for Patient ID 44 (U=1, Current='Radiology', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 8 minutes for path: Radiology -> Laboratories.
+  Log: Final Priority (U=1, T_travel=8, T_proc=105.0): 13.85
+  Log: Inserted: Patient ID 44 (Prio: 13.85)
+  Patient ID 44 added to priority heap with priority: 13.85
+
+Processing row 45: Sean Aventurine (ID: 45)...
+  Calculated Expected Treatment Time for Patient ID 45: 110.0 min (Travel: 5, Proc: 105.0)
+  Insert for ID 45. Probe sequence: [33]
+  Patient ID 45 inserted successfully at index 33.
+  Patient ID 45 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 45 (U=3, Current='Pharmacy', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Pharmacy -> Laboratories.
+  Log: Final Priority (U=3, T_travel=5, T_proc=105.0): 12.09
+  Heap capacity reached, resizing heap...
+  Heap resized to capacity: 80
+  Log: Inserted: Patient ID 45 (Prio: 12.09)
+  Patient ID 45 added to priority heap with priority: 12.09
+
+Processing row 46: Tia Bloodstone (ID: 46)...
+  Calculated Expected Treatment Time for Patient ID 46: 117.0 min (Travel: 12, Proc: 105.0)
+  Insert for ID 46. Probe sequence: [90]
+  Patient ID 46 inserted successfully at index 90.
+  Patient ID 46 successfully added to hash table as Under Treatment with ETT 117.0.
+
+  Log: Calculating Priority for Patient ID 46 (U=5, Current='Laboratories', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Laboratories -> Emergency.
+  Log: Final Priority (U=5, T_travel=12, T_proc=105.0): 9.55
+  Log: Inserted: Patient ID 46 (Prio: 9.55)
+  Patient ID 46 added to priority heap with priority: 9.55
+
+Processing row 47: Ulf Calcite (ID: 47)...
+  Calculated Expected Treatment Time for Patient ID 47: 123.0 min (Travel: 18, Proc: 105.0)
+  Insert for ID 47. Probe sequence: [147]
+  Patient ID 47 inserted successfully at index 147.
+  Patient ID 47 successfully added to hash table as Under Treatment with ETT 123.0.
+
+  Log: Calculating Priority for Patient ID 47 (U=2, Current='Operating Theatres', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 18 minutes for path: Operating Theatres -> ICU -> Laboratories -> Emergency.
+  Log: Final Priority (U=2, T_travel=18, T_proc=105.0): 12.13
+  Log: Inserted: Patient ID 47 (Prio: 12.13)
+  Patient ID 47 added to priority heap with priority: 12.13
+
+Processing row 48: Vera Carnelian (ID: 48)...
+
+No path found from 'Outpatient Units' to 'Emergency'.
+  Warning: No path found for Patient ID 48 from Outpatient Units to Emergency. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 48: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 48. Probe sequence: [204]
+  Patient ID 48 inserted successfully at index 204.
+  Patient ID 48 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 48 (U=4, Current='Outpatient Units', Dest='Emergency', ProcTime=105.0)...
+
+No path found from 'Outpatient Units' to 'Emergency'.
+  Log: No path found from Outpatient Units to Emergency. Defaulting travel time to 0.
+  Log: Final Priority (U=4, T_travel=0, T_proc=105.0): 11.52
+  Log: Inserted: Patient ID 48 (Prio: 11.52)
+  Patient ID 48 added to priority heap with priority: 11.52
+
+Processing row 49: Will Celestine (ID: 49)...
+  Calculated Expected Treatment Time for Patient ID 49: 117.0 min (Travel: 12, Proc: 105.0)
+  Insert for ID 49. Probe sequence: [50]
+  Patient ID 49 inserted successfully at index 50.
+  Patient ID 49 successfully added to hash table as Under Treatment with ETT 117.0.
+
+  Log: Calculating Priority for Patient ID 49 (U=1, Current='Emergency', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Emergency -> Laboratories.
+  Log: Final Priority (U=1, T_travel=12, T_proc=105.0): 13.55
+  Log: Inserted: Patient ID 49 (Prio: 13.55)
+  Patient ID 49 added to priority heap with priority: 13.55
+
+Processing row 50: Xenia Chalcedony (ID: 50)...
+  Insert for ID 50. Probe sequence: [107]
+  Patient ID 50 inserted successfully at index 107.
+  Patient ID 50 successfully added to hash table as Completed with ETT None.
+  Patient ID 50 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 50 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 51: Yusuf Chrysolite (ID: 51)...
+  Calculated Expected Treatment Time for Patient ID 51: 122.0 min (Travel: 17, Proc: 105.0)
+  Insert for ID 51. Probe sequence: [164]
+  Patient ID 51 inserted successfully at index 164.
+  Patient ID 51 successfully added to hash table as Under Treatment with ETT 122.0.
+
+  Log: Calculating Priority for Patient ID 51 (U=5, Current='Wards', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 17 minutes for path: Wards -> Laboratories -> Emergency.
+  Log: Final Priority (U=5, T_travel=17, T_proc=105.0): 9.20
+  Log: Inserted: Patient ID 51 (Prio: 9.20)
+  Patient ID 51 added to priority heap with priority: 9.20
+
+Processing row 52: Zoe Cinnabar (ID: 52)...
+  Calculated Expected Treatment Time for Patient ID 52: 115.0 min (Travel: 10, Proc: 105.0)
+  Insert for ID 52. Probe sequence: [10]
+  Patient ID 52 inserted successfully at index 10.
+  Patient ID 52 successfully added to hash table as Under Treatment with ETT 115.0.
+
+  Log: Calculating Priority for Patient ID 52 (U=2, Current='Radiology', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 10 minutes for path: Radiology -> Emergency.
+  Log: Final Priority (U=2, T_travel=10, T_proc=105.0): 12.70
+  Log: Inserted: Patient ID 52 (Prio: 12.70)
+  Patient ID 52 added to priority heap with priority: 12.70
+
+Processing row 53: Adam Copper (ID: 53)...
+  Calculated Expected Treatment Time for Patient ID 53: 122.0 min (Travel: 17, Proc: 105.0)
+  Insert for ID 53. Probe sequence: [67]
+  Patient ID 53 inserted successfully at index 67.
+  Patient ID 53 successfully added to hash table as Under Treatment with ETT 122.0.
+
+  Log: Calculating Priority for Patient ID 53 (U=4, Current='Pharmacy', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 17 minutes for path: Pharmacy -> Laboratories -> Emergency.
+  Log: Final Priority (U=4, T_travel=17, T_proc=105.0): 10.20
+  Log: Inserted: Patient ID 53 (Prio: 10.20)
+  Patient ID 53 added to priority heap with priority: 10.20
+
+Processing row 54: Bella Corundum (ID: 54)...
+  Calculated Expected Treatment Time for Patient ID 54: 110.0 min (Travel: 5, Proc: 105.0)
+  Insert for ID 54. Probe sequence: [124]
+  Patient ID 54 inserted successfully at index 124.
+  Patient ID 54 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 54 (U=1, Current='Laboratories', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Laboratories -> Pharmacy.
+  Log: Final Priority (U=1, T_travel=5, T_proc=105.0): 14.09
+  Log: Inserted: Patient ID 54 (Prio: 14.09)
+  Patient ID 54 added to priority heap with priority: 14.09
+
+Processing row 55: Caleb Crocoite (ID: 55)...
+  Calculated Expected Treatment Time for Patient ID 55: 111.0 min (Travel: 6, Proc: 105.0)
+  Insert for ID 55. Probe sequence: [181]
+  Patient ID 55 inserted successfully at index 181.
+  Patient ID 55 successfully added to hash table as Under Treatment with ETT 111.0.
+
+  Log: Calculating Priority for Patient ID 55 (U=3, Current='Operating Theatres', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 6 minutes for path: Operating Theatres -> ICU -> Laboratories.
+  Log: Final Priority (U=3, T_travel=6, T_proc=105.0): 12.01
+  Log: Inserted: Patient ID 55 (Prio: 12.01)
+  Patient ID 55 added to priority heap with priority: 12.01
+
+Processing row 56: Daisy Cuprite (ID: 56)...
+
+No path found from 'Outpatient Units' to 'Laboratories'.
+  Warning: No path found for Patient ID 56 from Outpatient Units to Laboratories. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 56: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 56. Probe sequence: [27]
+  Patient ID 56 inserted successfully at index 27.
+  Patient ID 56 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 56 (U=5, Current='Outpatient Units', Dest='Laboratories', ProcTime=105.0)...
+
+No path found from 'Outpatient Units' to 'Laboratories'.
+  Log: No path found from Outpatient Units to Laboratories. Defaulting travel time to 0.
+  Log: Final Priority (U=5, T_travel=0, T_proc=105.0): 10.52
+  Log: Inserted: Patient ID 56 (Prio: 10.52)
+  Patient ID 56 added to priority heap with priority: 10.52
+
+Processing row 57: Ethan Datolite (ID: 57)...
+  Calculated Expected Treatment Time for Patient ID 57: 117.0 min (Travel: 12, Proc: 105.0)
+  Insert for ID 57. Probe sequence: [84]
+  Patient ID 57 inserted successfully at index 84.
+  Patient ID 57 successfully added to hash table as Under Treatment with ETT 117.0.
+
+  Log: Calculating Priority for Patient ID 57 (U=2, Current='Emergency', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Emergency -> Laboratories.
+  Log: Final Priority (U=2, T_travel=12, T_proc=105.0): 12.55
+  Log: Inserted: Patient ID 57 (Prio: 12.55)
+  Patient ID 57 added to priority heap with priority: 12.55
+
+Processing row 58: Fiona Demantoid (ID: 58)...
+  Calculated Expected Treatment Time for Patient ID 58: 107.0 min (Travel: 2, Proc: 105.0)
+  Insert for ID 58. Probe sequence: [141]
+  Patient ID 58 inserted successfully at index 141.
+  Patient ID 58 successfully added to hash table as Under Treatment with ETT 107.0.
+
+  Log: Calculating Priority for Patient ID 58 (U=4, Current='ICU', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 2 minutes for path: ICU -> Laboratories.
+  Log: Final Priority (U=4, T_travel=2, T_proc=105.0): 11.35
+  Log: Inserted: Patient ID 58 (Prio: 11.35)
+  Patient ID 58 added to priority heap with priority: 11.35
+
+Processing row 59: George Epidote (ID: 59)...
+  Calculated Expected Treatment Time for Patient ID 59: 110.0 min (Travel: 5, Proc: 105.0)
+  Insert for ID 59. Probe sequence: [198]
+  Patient ID 59 inserted successfully at index 198.
+  Patient ID 59 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 59 (U=1, Current='Wards', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Wards -> Laboratories.
+  Log: Final Priority (U=1, T_travel=5, T_proc=105.0): 14.09
+  Log: Inserted: Patient ID 59 (Prio: 14.09)
+  Patient ID 59 added to priority heap with priority: 14.09
+
+Processing row 60: Hannah Fluorite (ID: 60)...
+  Insert for ID 60. Probe sequence: [44]
+  Patient ID 60 inserted successfully at index 44.
+  Patient ID 60 successfully added to hash table as Completed with ETT None.
+  Patient ID 60 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 60 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 61: Isaac Garnet (ID: 61)...
+  Calculated Expected Treatment Time for Patient ID 61: 110.0 min (Travel: 5, Proc: 105.0)
+  Insert for ID 61. Probe sequence: [101]
+  Patient ID 61 inserted successfully at index 101.
+  Patient ID 61 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 61 (U=5, Current='Pharmacy', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Pharmacy -> Laboratories.
+  Log: Final Priority (U=5, T_travel=5, T_proc=105.0): 10.09
+  Log: Inserted: Patient ID 61 (Prio: 10.09)
+  Patient ID 61 added to priority heap with priority: 10.09
+
+Processing row 62: Jenna Geode (ID: 62)...
+  Calculated Expected Treatment Time for Patient ID 62: 110.0 min (Travel: 5, Proc: 105.0)
+  Insert for ID 62. Probe sequence: [158]
+  Patient ID 62 inserted successfully at index 158.
+  Patient ID 62 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 62 (U=2, Current='Laboratories', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Laboratories -> Pharmacy.
+  Log: Final Priority (U=2, T_travel=5, T_proc=105.0): 13.09
+  Log: Inserted: Patient ID 62 (Prio: 13.09)
+  Patient ID 62 added to priority heap with priority: 13.09
+
+Processing row 63: Kyle Gold (ID: 63)...
+  Calculated Expected Treatment Time for Patient ID 63: 116.0 min (Travel: 11, Proc: 105.0)
+  Insert for ID 63. Probe sequence: [4]
+  Patient ID 63 inserted successfully at index 4.
+  Patient ID 63 successfully added to hash table as Under Treatment with ETT 116.0.
+
+  Log: Calculating Priority for Patient ID 63 (U=4, Current='Operating Theatres', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Operating Theatres -> ICU -> Pharmacy.
+  Log: Final Priority (U=4, T_travel=11, T_proc=105.0): 10.62
+  Log: Inserted: Patient ID 63 (Prio: 10.62)
+  Patient ID 63 added to priority heap with priority: 10.62
+
+Processing row 64: Lana Gypsum (ID: 64)...
+
+No path found from 'Outpatient Units' to 'Pharmacy'.
+  Warning: No path found for Patient ID 64 from Outpatient Units to Pharmacy. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 64: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 64. Probe sequence: [61]
+  Patient ID 64 inserted successfully at index 61.
+  Patient ID 64 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 64 (U=1, Current='Outpatient Units', Dest='Pharmacy', ProcTime=105.0)...
+
+No path found from 'Outpatient Units' to 'Pharmacy'.
+  Log: No path found from Outpatient Units to Pharmacy. Defaulting travel time to 0.
+  Log: Final Priority (U=1, T_travel=0, T_proc=105.0): 14.52
+  Log: Inserted: Patient ID 64 (Prio: 14.52)
+  Patient ID 64 added to priority heap with priority: 14.52
+
+Processing row 65: Max Hematite (ID: 65)...
+  Calculated Expected Treatment Time for Patient ID 65: 122.0 min (Travel: 17, Proc: 105.0)
+  Insert for ID 65. Probe sequence: [118]
+  Patient ID 65 inserted successfully at index 118.
+  Patient ID 65 successfully added to hash table as Under Treatment with ETT 122.0.
+
+  Log: Calculating Priority for Patient ID 65 (U=3, Current='Emergency', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 17 minutes for path: Emergency -> Laboratories -> Pharmacy.
+  Log: Final Priority (U=3, T_travel=17, T_proc=105.0): 11.20
+  Log: Inserted: Patient ID 65 (Prio: 11.20)
+  Patient ID 65 added to priority heap with priority: 11.20
+
+Processing row 66: Nora Herkimer (ID: 66)...
+  Calculated Expected Treatment Time for Patient ID 66: 112.0 min (Travel: 7, Proc: 105.0)
+  Insert for ID 66. Probe sequence: [175]
+  Patient ID 66 inserted successfully at index 175.
+  Patient ID 66 successfully added to hash table as Under Treatment with ETT 112.0.
+
+  Log: Calculating Priority for Patient ID 66 (U=5, Current='ICU', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 7 minutes for path: ICU -> Pharmacy.
+  Log: Final Priority (U=5, T_travel=7, T_proc=105.0): 9.93
+  Log: Inserted: Patient ID 66 (Prio: 9.93)
+  Patient ID 66 added to priority heap with priority: 9.93
+
+Processing row 67: Oscar Howlite (ID: 67)...
+  Calculated Expected Treatment Time for Patient ID 67: 111.0 min (Travel: 6, Proc: 105.0)
+  Insert for ID 67. Probe sequence: [21]
+  Patient ID 67 inserted successfully at index 21.
+  Patient ID 67 successfully added to hash table as Under Treatment with ETT 111.0.
+
+  Log: Calculating Priority for Patient ID 67 (U=2, Current='Wards', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 6 minutes for path: Wards -> Pharmacy.
+  Log: Final Priority (U=2, T_travel=6, T_proc=105.0): 13.01
+  Log: Inserted: Patient ID 67 (Prio: 13.01)
+  Patient ID 67 added to priority heap with priority: 13.01
+
+Processing row 68: Penny Iolite (ID: 68)...
+  Calculated Expected Treatment Time for Patient ID 68: 118.0 min (Travel: 13, Proc: 105.0)
+  Insert for ID 68. Probe sequence: [78]
+  Patient ID 68 inserted successfully at index 78.
+  Patient ID 68 successfully added to hash table as Under Treatment with ETT 118.0.
+
+  Log: Calculating Priority for Patient ID 68 (U=4, Current='Radiology', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 13 minutes for path: Radiology -> Laboratories -> Pharmacy.
+  Log: Final Priority (U=4, T_travel=13, T_proc=105.0): 10.47
+  Log: Inserted: Patient ID 68 (Prio: 10.47)
+  Patient ID 68 added to priority heap with priority: 10.47
+
+Processing row 69: Quincy Jasper (ID: 69)...
+  Calculated Expected Treatment Time for Patient ID 69: 116.0 min (Travel: 11, Proc: 105.0)
+  Insert for ID 69. Probe sequence: [135]
+  Patient ID 69 inserted successfully at index 135.
+  Patient ID 69 successfully added to hash table as Under Treatment with ETT 116.0.
+
+  Log: Calculating Priority for Patient ID 69 (U=1, Current='Pharmacy', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Pharmacy -> ICU -> Operating Theatres.
+  Log: Final Priority (U=1, T_travel=11, T_proc=105.0): 13.62
+  Log: Inserted: Patient ID 69 (Prio: 13.62)
+  Patient ID 69 added to priority heap with priority: 13.62
+
+Processing row 70: Rose Kyanite (ID: 70)...
+  Calculated Expected Treatment Time for Patient ID 70: 111.0 min (Travel: 6, Proc: 105.0)
+  Insert for ID 70. Probe sequence: [192]
+  Patient ID 70 inserted successfully at index 192.
+  Patient ID 70 successfully added to hash table as Under Treatment with ETT 111.0.
+
+  Log: Calculating Priority for Patient ID 70 (U=3, Current='Laboratories', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 6 minutes for path: Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=3, T_travel=6, T_proc=105.0): 12.01
+  Log: Inserted: Patient ID 70 (Prio: 12.01)
+  Patient ID 70 added to priority heap with priority: 12.01
+
+Processing row 71: Steve Labradorite (ID: 71)...
+  Insert for ID 71. Probe sequence: [38]
+  Patient ID 71 inserted successfully at index 38.
+  Patient ID 71 successfully added to hash table as Completed with ETT None.
+  Patient ID 71 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 71 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 72: Tracy Lapis (ID: 72)...
+
+No path found from 'Outpatient Units' to 'Operating Theatres'.
+  Warning: No path found for Patient ID 72 from Outpatient Units to Operating Theatres. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 72: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 72. Probe sequence: [95]
+  Patient ID 72 inserted successfully at index 95.
+  Patient ID 72 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 72 (U=2, Current='Outpatient Units', Dest='Operating Theatres', ProcTime=105.0)...
+
+No path found from 'Outpatient Units' to 'Operating Theatres'.
+  Log: No path found from Outpatient Units to Operating Theatres. Defaulting travel time to 0.
+  Log: Final Priority (U=2, T_travel=0, T_proc=105.0): 13.52
+  Log: Inserted: Patient ID 72 (Prio: 13.52)
+  Patient ID 72 added to priority heap with priority: 13.52
+
+Processing row 73: Ursula Larimar (ID: 73)...
+  Calculated Expected Treatment Time for Patient ID 73: 123.0 min (Travel: 18, Proc: 105.0)
+  Insert for ID 73. Probe sequence: [152]
+  Patient ID 73 inserted successfully at index 152.
+  Patient ID 73 successfully added to hash table as Under Treatment with ETT 123.0.
+
+  Log: Calculating Priority for Patient ID 73 (U=4, Current='Emergency', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 18 minutes for path: Emergency -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=4, T_travel=18, T_proc=105.0): 10.13
+  Log: Inserted: Patient ID 73 (Prio: 10.13)
+  Patient ID 73 added to priority heap with priority: 10.13
+
+Processing row 74: Vince Lepidolite (ID: 74)...
+  Calculated Expected Treatment Time for Patient ID 74: 109.0 min (Travel: 4, Proc: 105.0)
+  Insert for ID 74. Probe sequence: [209]
+  Patient ID 74 inserted successfully at index 209.
+  Patient ID 74 successfully added to hash table as Under Treatment with ETT 109.0.
+
+  Log: Calculating Priority for Patient ID 74 (U=1, Current='ICU', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 4 minutes for path: ICU -> Operating Theatres.
+  Log: Final Priority (U=1, T_travel=4, T_proc=105.0): 14.17
+  Log: Inserted: Patient ID 74 (Prio: 14.17)
+  Patient ID 74 added to priority heap with priority: 14.17
+
+Processing row 75: Wanda Malachite (ID: 75)...
+  Calculated Expected Treatment Time for Patient ID 75: 116.0 min (Travel: 11, Proc: 105.0)
+  Insert for ID 75. Probe sequence: [55]
+  Patient ID 75 inserted successfully at index 55.
+  Patient ID 75 successfully added to hash table as Under Treatment with ETT 116.0.
+
+  Log: Calculating Priority for Patient ID 75 (U=3, Current='Wards', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Wards -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=3, T_travel=11, T_proc=105.0): 11.62
+  Log: Inserted: Patient ID 75 (Prio: 11.62)
+  Patient ID 75 added to priority heap with priority: 11.62
+
+Processing row 76: Xena Marble (ID: 76)...
+  Calculated Expected Treatment Time for Patient ID 76: 119.0 min (Travel: 14, Proc: 105.0)
+  Insert for ID 76. Probe sequence: [112]
+  Patient ID 76 inserted successfully at index 112.
+  Patient ID 76 successfully added to hash table as Under Treatment with ETT 119.0.
+
+  Log: Calculating Priority for Patient ID 76 (U=5, Current='Radiology', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 14 minutes for path: Radiology -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=5, T_travel=14, T_proc=105.0): 9.40
+  Log: Inserted: Patient ID 76 (Prio: 9.40)
+  Patient ID 76 added to priority heap with priority: 9.40
+
+Processing row 77: Yanis Meteorite (ID: 77)...
+  Calculated Expected Treatment Time for Patient ID 77: 116.0 min (Travel: 11, Proc: 105.0)
+  Insert for ID 77. Probe sequence: [169]
+  Patient ID 77 inserted successfully at index 169.
+  Patient ID 77 successfully added to hash table as Under Treatment with ETT 116.0.
+
+  Log: Calculating Priority for Patient ID 77 (U=2, Current='Pharmacy', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Pharmacy -> ICU -> Operating Theatres.
+  Log: Final Priority (U=2, T_travel=11, T_proc=105.0): 12.62
+  Log: Inserted: Patient ID 77 (Prio: 12.62)
+  Patient ID 77 added to priority heap with priority: 12.62
+
+Processing row 78: Zara Moonstone (ID: 78)...
+  Calculated Expected Treatment Time for Patient ID 78: 111.0 min (Travel: 6, Proc: 105.0)
+  Insert for ID 78. Probe sequence: [15]
+  Patient ID 78 inserted successfully at index 15.
+  Patient ID 78 successfully added to hash table as Under Treatment with ETT 111.0.
+
+  Log: Calculating Priority for Patient ID 78 (U=4, Current='Laboratories', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 6 minutes for path: Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=4, T_travel=6, T_proc=105.0): 11.01
+  Log: Inserted: Patient ID 78 (Prio: 11.01)
+  Patient ID 78 added to priority heap with priority: 11.01
+
+Processing row 79: Alan Obsidian (ID: 79)...
+  Calculated Expected Treatment Time for Patient ID 79: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 79. Probe sequence: [72]
+  Patient ID 79 inserted successfully at index 72.
+  Patient ID 79 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 79 (U=1, Current='Operating Theatres', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 0 minutes for path: Operating Theatres.
+  Log: Final Priority (U=1, T_travel=0, T_proc=105.0): 14.52
+  Log: Inserted: Patient ID 79 (Prio: 14.52)
+  Patient ID 79 added to priority heap with priority: 14.52
+
+Processing row 80: Beth Onyx (ID: 80)...
+
+No path found from 'Outpatient Units' to 'Operating Theatres'.
+  Warning: No path found for Patient ID 80 from Outpatient Units to Operating Theatres. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 80: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 80. Probe sequence: [129]
+  Patient ID 80 inserted successfully at index 129.
+  Patient ID 80 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 80 (U=3, Current='Outpatient Units', Dest='Operating Theatres', ProcTime=105.0)...
+
+No path found from 'Outpatient Units' to 'Operating Theatres'.
+  Log: No path found from Outpatient Units to Operating Theatres. Defaulting travel time to 0.
+  Log: Final Priority (U=3, T_travel=0, T_proc=105.0): 12.52
+  Log: Inserted: Patient ID 80 (Prio: 12.52)
+  Patient ID 80 added to priority heap with priority: 12.52
+
+Processing row 81: Carl Opal (ID: 81)...
+  Calculated Expected Treatment Time for Patient ID 81: 123.0 min (Travel: 18, Proc: 105.0)
+  Insert for ID 81. Probe sequence: [186]
+  Patient ID 81 inserted successfully at index 186.
+  Patient ID 81 successfully added to hash table as Under Treatment with ETT 123.0.
+
+  Log: Calculating Priority for Patient ID 81 (U=5, Current='Emergency', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 18 minutes for path: Emergency -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=5, T_travel=18, T_proc=105.0): 9.13
+  Log: Inserted: Patient ID 81 (Prio: 9.13)
+  Patient ID 81 added to priority heap with priority: 9.13
+
+Processing row 82: Debra Pearl (ID: 82)...
+  Insert for ID 82. Probe sequence: [32]
+  Patient ID 82 inserted successfully at index 32.
+  Patient ID 82 successfully added to hash table as Completed with ETT None.
+  Patient ID 82 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 82 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+Processing row 83: Edgar Peridot (ID: 83)...
+  Calculated Expected Treatment Time for Patient ID 83: 116.0 min (Travel: 11, Proc: 105.0)
+  Insert for ID 83. Probe sequence: [89]
+  Patient ID 83 inserted successfully at index 89.
+  Patient ID 83 successfully added to hash table as Under Treatment with ETT 116.0.
+
+  Log: Calculating Priority for Patient ID 83 (U=4, Current='Wards', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Wards -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=4, T_travel=11, T_proc=105.0): 10.62
+  Log: Inserted: Patient ID 83 (Prio: 10.62)
+  Patient ID 83 added to priority heap with priority: 10.62
+
+Processing row 84: Fay Pyrite (ID: 84)...
+  Calculated Expected Treatment Time for Patient ID 84: 119.0 min (Travel: 14, Proc: 105.0)
+  Insert for ID 84. Probe sequence: [146]
+  Patient ID 84 inserted successfully at index 146.
+  Patient ID 84 successfully added to hash table as Under Treatment with ETT 119.0.
+
+  Log: Calculating Priority for Patient ID 84 (U=1, Current='Radiology', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 14 minutes for path: Radiology -> Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=1, T_travel=14, T_proc=105.0): 13.40
+  Log: Inserted: Patient ID 84 (Prio: 13.40)
+  Patient ID 84 added to priority heap with priority: 13.40
+
+Processing row 85: Gavin Quartz (ID: 85)...
+  Calculated Expected Treatment Time for Patient ID 85: 116.0 min (Travel: 11, Proc: 105.0)
+  Insert for ID 85. Probe sequence: [203]
+  Patient ID 85 inserted successfully at index 203.
+  Patient ID 85 successfully added to hash table as Under Treatment with ETT 116.0.
+
+  Log: Calculating Priority for Patient ID 85 (U=3, Current='Pharmacy', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Pharmacy -> ICU -> Operating Theatres.
+  Log: Final Priority (U=3, T_travel=11, T_proc=105.0): 11.62
+  Log: Inserted: Patient ID 85 (Prio: 11.62)
+  Patient ID 85 added to priority heap with priority: 11.62
+
+Processing row 86: Holly Rhodonite (ID: 86)...
+  Calculated Expected Treatment Time for Patient ID 86: 111.0 min (Travel: 6, Proc: 105.0)
+  Insert for ID 86. Probe sequence: [49]
+  Patient ID 86 inserted successfully at index 49.
+  Patient ID 86 successfully added to hash table as Under Treatment with ETT 111.0.
+
+  Log: Calculating Priority for Patient ID 86 (U=5, Current='Laboratories', Dest='Operating Theatres', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 6 minutes for path: Laboratories -> ICU -> Operating Theatres.
+  Log: Final Priority (U=5, T_travel=6, T_proc=105.0): 10.01
+  Log: Inserted: Patient ID 86 (Prio: 10.01)
+  Patient ID 86 added to priority heap with priority: 10.01
+
+Processing row 87: Ian Rose (ID: 87)...
+  Calculated Expected Treatment Time for Patient ID 87: 116.0 min (Travel: 11, Proc: 105.0)
+  Insert for ID 87. Probe sequence: [106]
+  Patient ID 87 inserted successfully at index 106.
+  Patient ID 87 successfully added to hash table as Under Treatment with ETT 116.0.
+
+  Log: Calculating Priority for Patient ID 87 (U=2, Current='Operating Theatres', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 11 minutes for path: Operating Theatres -> ICU -> Pharmacy.
+  Log: Final Priority (U=2, T_travel=11, T_proc=105.0): 12.62
+  Log: Inserted: Patient ID 87 (Prio: 12.62)
+  Patient ID 87 added to priority heap with priority: 12.62
+
+Processing row 88: Joy Ruby (ID: 88)...
+
+No path found from 'Outpatient Units' to 'Pharmacy'.
+  Warning: No path found for Patient ID 88 from Outpatient Units to Pharmacy. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 88: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 88. Probe sequence: [163]
+  Patient ID 88 inserted successfully at index 163.
+  Patient ID 88 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 88 (U=4, Current='Outpatient Units', Dest='Pharmacy', ProcTime=105.0)...
+
+No path found from 'Outpatient Units' to 'Pharmacy'.
+  Log: No path found from Outpatient Units to Pharmacy. Defaulting travel time to 0.
+  Log: Final Priority (U=4, T_travel=0, T_proc=105.0): 11.52
+  Log: Inserted: Patient ID 88 (Prio: 11.52)
+  Patient ID 88 added to priority heap with priority: 11.52
+
+Processing row 89: Kevin Salt (ID: 89)...
+  Calculated Expected Treatment Time for Patient ID 89: 122.0 min (Travel: 17, Proc: 105.0)
+  Insert for ID 89. Probe sequence: [9]
+  Patient ID 89 inserted successfully at index 9.
+  Patient ID 89 successfully added to hash table as Under Treatment with ETT 122.0.
+
+  Log: Calculating Priority for Patient ID 89 (U=1, Current='Emergency', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 17 minutes for path: Emergency -> Laboratories -> Pharmacy.
+  Log: Final Priority (U=1, T_travel=17, T_proc=105.0): 13.20
+  Heap capacity reached, resizing heap...
+  Heap resized to capacity: 160
+  Log: Inserted: Patient ID 89 (Prio: 13.20)
+  Patient ID 89 added to priority heap with priority: 13.20
+
+Processing row 90: Lisa Sapphire (ID: 90)...
+  Calculated Expected Treatment Time for Patient ID 90: 112.0 min (Travel: 7, Proc: 105.0)
+  Insert for ID 90. Probe sequence: [66]
+  Patient ID 90 inserted successfully at index 66.
+  Patient ID 90 successfully added to hash table as Under Treatment with ETT 112.0.
+
+  Log: Calculating Priority for Patient ID 90 (U=3, Current='ICU', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 7 minutes for path: ICU -> Pharmacy.
+  Log: Final Priority (U=3, T_travel=7, T_proc=105.0): 11.93
+  Log: Inserted: Patient ID 90 (Prio: 11.93)
+  Patient ID 90 added to priority heap with priority: 11.93
+
+Processing row 91: Mark Serpentine (ID: 91)...
+  Calculated Expected Treatment Time for Patient ID 91: 111.0 min (Travel: 6, Proc: 105.0)
+  Insert for ID 91. Probe sequence: [123]
+  Patient ID 91 inserted successfully at index 123.
+  Patient ID 91 successfully added to hash table as Under Treatment with ETT 111.0.
+
+  Log: Calculating Priority for Patient ID 91 (U=5, Current='Wards', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 6 minutes for path: Wards -> Pharmacy.
+  Log: Final Priority (U=5, T_travel=6, T_proc=105.0): 10.01
+  Log: Inserted: Patient ID 91 (Prio: 10.01)
+  Patient ID 91 added to priority heap with priority: 10.01
+
+Processing row 92: Nancy Silver (ID: 92)...
+  Calculated Expected Treatment Time for Patient ID 92: 118.0 min (Travel: 13, Proc: 105.0)
+  Insert for ID 92. Probe sequence: [180]
+  Patient ID 92 inserted successfully at index 180.
+  Patient ID 92 successfully added to hash table as Under Treatment with ETT 118.0.
+
+  Log: Calculating Priority for Patient ID 92 (U=2, Current='Radiology', Dest='Pharmacy', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 13 minutes for path: Radiology -> Laboratories -> Pharmacy.
+  Log: Final Priority (U=2, T_travel=13, T_proc=105.0): 12.47
+  Log: Inserted: Patient ID 92 (Prio: 12.47)
+  Patient ID 92 added to priority heap with priority: 12.47
+
+Processing row 93: Oliver Sodalite (ID: 93)...
+  Calculated Expected Treatment Time for Patient ID 93: 122.0 min (Travel: 17, Proc: 105.0)
+  Insert for ID 93. Probe sequence: [26]
+  Patient ID 93 inserted successfully at index 26.
+  Patient ID 93 successfully added to hash table as Under Treatment with ETT 122.0.
+
+  Log: Calculating Priority for Patient ID 93 (U=4, Current='Pharmacy', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 17 minutes for path: Pharmacy -> Laboratories -> Emergency.
+  Log: Final Priority (U=4, T_travel=17, T_proc=105.0): 10.20
+  Log: Inserted: Patient ID 93 (Prio: 10.20)
+  Patient ID 93 added to priority heap with priority: 10.20
+
+Processing row 94: Pat Spinel (ID: 94)...
+  Calculated Expected Treatment Time for Patient ID 94: 117.0 min (Travel: 12, Proc: 105.0)
+  Insert for ID 94. Probe sequence: [83]
+  Patient ID 94 inserted successfully at index 83.
+  Patient ID 94 successfully added to hash table as Under Treatment with ETT 117.0.
+
+  Log: Calculating Priority for Patient ID 94 (U=1, Current='Laboratories', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Laboratories -> Emergency.
+  Log: Final Priority (U=1, T_travel=12, T_proc=105.0): 13.55
+  Log: Inserted: Patient ID 94 (Prio: 13.55)
+  Patient ID 94 added to priority heap with priority: 13.55
+
+Processing row 95: Quinn Sugilite (ID: 95)...
+  Calculated Expected Treatment Time for Patient ID 95: 123.0 min (Travel: 18, Proc: 105.0)
+  Insert for ID 95. Probe sequence: [140]
+  Patient ID 95 inserted successfully at index 140.
+  Patient ID 95 successfully added to hash table as Under Treatment with ETT 123.0.
+
+  Log: Calculating Priority for Patient ID 95 (U=3, Current='Operating Theatres', Dest='Emergency', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 18 minutes for path: Operating Theatres -> ICU -> Laboratories -> Emergency.
+  Log: Final Priority (U=3, T_travel=18, T_proc=105.0): 11.13
+  Log: Inserted: Patient ID 95 (Prio: 11.13)
+  Patient ID 95 added to priority heap with priority: 11.13
+
+Processing row 96: Renee Sunstone (ID: 96)...
+
+No path found from 'Outpatient Units' to 'Emergency'.
+  Warning: No path found for Patient ID 96 from Outpatient Units to Emergency. Assuming travel time 0.
+  Calculated Expected Treatment Time for Patient ID 96: 105.0 min (Travel: 0, Proc: 105.0)
+  Insert for ID 96. Probe sequence: [197]
+  Patient ID 96 inserted successfully at index 197.
+  Patient ID 96 successfully added to hash table as Under Treatment with ETT 105.0.
+
+  Log: Calculating Priority for Patient ID 96 (U=5, Current='Outpatient Units', Dest='Emergency', ProcTime=105.0)...
+
+No path found from 'Outpatient Units' to 'Emergency'.
+  Log: No path found from Outpatient Units to Emergency. Defaulting travel time to 0.
+  Log: Final Priority (U=5, T_travel=0, T_proc=105.0): 10.52
+  Log: Inserted: Patient ID 96 (Prio: 10.52)
+  Patient ID 96 added to priority heap with priority: 10.52
+
+Processing row 97: Sam Tigerseye (ID: 97)...
+  Calculated Expected Treatment Time for Patient ID 97: 117.0 min (Travel: 12, Proc: 105.0)
+  Insert for ID 97. Probe sequence: [43]
+  Patient ID 97 inserted successfully at index 43.
+  Patient ID 97 successfully added to hash table as Under Treatment with ETT 117.0.
+
+  Log: Calculating Priority for Patient ID 97 (U=2, Current='Emergency', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Emergency -> Laboratories.
+  Log: Final Priority (U=2, T_travel=12, T_proc=105.0): 12.55
+  Log: Inserted: Patient ID 97 (Prio: 12.55)
+  Patient ID 97 added to priority heap with priority: 12.55
+
+Processing row 98: Tara Topaz (ID: 98)...
+  Calculated Expected Treatment Time for Patient ID 98: 107.0 min (Travel: 2, Proc: 105.0)
+  Insert for ID 98. Probe sequence: [100]
+  Patient ID 98 inserted successfully at index 100.
+  Patient ID 98 successfully added to hash table as Under Treatment with ETT 107.0.
+
+  Log: Calculating Priority for Patient ID 98 (U=4, Current='ICU', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 2 minutes for path: ICU -> Laboratories.
+  Log: Final Priority (U=4, T_travel=2, T_proc=105.0): 11.35
+  Log: Inserted: Patient ID 98 (Prio: 11.35)
+  Patient ID 98 added to priority heap with priority: 11.35
+
+Processing row 99: Uma Tourmaline (ID: 99)...
+  Calculated Expected Treatment Time for Patient ID 99: 110.0 min (Travel: 5, Proc: 105.0)
+  Insert for ID 99. Probe sequence: [157]
+  Patient ID 99 inserted successfully at index 157.
+  Patient ID 99 successfully added to hash table as Under Treatment with ETT 110.0.
+
+  Log: Calculating Priority for Patient ID 99 (U=1, Current='Wards', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 5 minutes for path: Wards -> Laboratories.
+  Log: Final Priority (U=1, T_travel=5, T_proc=105.0): 14.09
+  Log: Inserted: Patient ID 99 (Prio: 14.09)
+  Patient ID 99 added to priority heap with priority: 14.09
+
+Processing row 100: Victor Turquoise (ID: 100)...
+  Insert for ID 100. Probe sequence: [3]
+  Patient ID 100 inserted successfully at index 3.
+  Patient ID 100 successfully added to hash table as Completed with ETT None.
+  Patient ID 100 has treatment status 'Completed'. No priority needed; skipping.
+  Patient ID 100 did not qualify for priority heap (e.g., 'Completed' status or invalid data).
+
+--- Module 2: Hash Table State After CSV Load ---
+
+--- Current Hash Table State ---
+Table Size: 211, Active Count: 100, Load Factor: 0.47
+[ 0] State: NEVER_USED      ID: None       Name: None           
+[ 1] State: NEVER_USED      ID: None       Name: None           
+[ 2] State: NEVER_USED      ID: None       Name: None           
+[ 3] State: USED            ID: 100        Name: Victor Turquoise
+[ 4] State: USED            ID: 63         Name: Kyle Gold      
+[ 5] State: USED            ID: 26         Name: Zane Emerald   
+[ 6] State: NEVER_USED      ID: None       Name: None           
+[ 7] State: NEVER_USED      ID: None       Name: None           
+[ 8] State: NEVER_USED      ID: None       Name: None           
+[ 9] State: USED            ID: 89         Name: Kevin Salt     
+[10] State: USED            ID: 52         Name: Zoe Cinnabar   
+[11] State: USED            ID: 15         Name: Olivia Yellow  
+[12] State: NEVER_USED      ID: None       Name: None           
+[13] State: NEVER_USED      ID: None       Name: None           
+[14] State: NEVER_USED      ID: None       Name: None           
+[15] State: USED            ID: 78         Name: Zara Moonstone 
+[16] State: USED            ID: 41         Name: Orla Zircon    
+[17] State: USED            ID: 4          Name: Diana Prince   
+[18] State: NEVER_USED      ID: None       Name: None           
+[19] State: NEVER_USED      ID: None       Name: None           
+[20] State: NEVER_USED      ID: None       Name: None           
+[21] State: USED            ID: 67         Name: Oscar Howlite  
+[22] State: USED            ID: 30         Name: David Diamond  
+[23] State: NEVER_USED      ID: None       Name: None           
+[24] State: NEVER_USED      ID: None       Name: None           
+[25] State: NEVER_USED      ID: None       Name: None           
+[26] State: USED            ID: 93         Name: Oliver Sodalite
+[27] State: USED            ID: 56         Name: Daisy Cuprite  
+[28] State: USED            ID: 19         Name: Sam Magenta    
+[29] State: NEVER_USED      ID: None       Name: None           
+[30] State: NEVER_USED      ID: None       Name: None           
+[31] State: NEVER_USED      ID: None       Name: None           
+[32] State: USED            ID: 82         Name: Debra Pearl    
+[33] State: USED            ID: 45         Name: Sean Aventurine
+[34] State: USED            ID: 8          Name: Henry Green    
+[35] State: NEVER_USED      ID: None       Name: None           
+[36] State: NEVER_USED      ID: None       Name: None           
+[37] State: NEVER_USED      ID: None       Name: None           
+[38] State: USED            ID: 71         Name: Steve Labradorite
+[39] State: USED            ID: 34         Name: Harry Peridot  
+[40] State: NEVER_USED      ID: None       Name: None           
+[41] State: NEVER_USED      ID: None       Name: None           
+[42] State: NEVER_USED      ID: None       Name: None           
+[43] State: USED            ID: 97         Name: Sam Tigerseye  
+[44] State: USED            ID: 60         Name: Hannah Fluorite
+[45] State: USED            ID: 23         Name: Wendy Pearl    
+[46] State: NEVER_USED      ID: None       Name: None           
+[47] State: NEVER_USED      ID: None       Name: None           
+[48] State: NEVER_USED      ID: None       Name: None           
+[49] State: USED            ID: 86         Name: Holly Rhodonite
+[50] State: USED            ID: 49         Name: Will Celestine 
+[51] State: USED            ID: 12         Name: Liam Red       
+[52] State: NEVER_USED      ID: None       Name: None           
+[53] State: NEVER_USED      ID: None       Name: None           
+[54] State: NEVER_USED      ID: None       Name: None           
+[55] State: USED            ID: 75         Name: Wanda Malachite
+[56] State: USED            ID: 38         Name: Leo Topaz      
+[57] State: USED            ID: 1          Name: Alice Smith    
+[58] State: NEVER_USED      ID: None       Name: None           
+[59] State: NEVER_USED      ID: None       Name: None           
+[60] State: NEVER_USED      ID: None       Name: None           
+[61] State: USED            ID: 64         Name: Lana Gypsum    
+[62] State: USED            ID: 27         Name: Amy Amethyst   
+[63] State: NEVER_USED      ID: None       Name: None           
+[64] State: NEVER_USED      ID: None       Name: None           
+[65] State: NEVER_USED      ID: None       Name: None           
+[66] State: USED            ID: 90         Name: Lisa Sapphire  
+[67] State: USED            ID: 53         Name: Adam Copper    
+[68] State: USED            ID: 16         Name: Peter Pink     
+[69] State: NEVER_USED      ID: None       Name: None           
+[70] State: NEVER_USED      ID: None       Name: None           
+[71] State: NEVER_USED      ID: None       Name: None           
+[72] State: USED            ID: 79         Name: Alan Obsidian  
+[73] State: USED            ID: 42         Name: Pauline Agate  
+[74] State: USED            ID: 5          Name: Eve Adams      
+[75] State: NEVER_USED      ID: None       Name: None           
+[76] State: NEVER_USED      ID: None       Name: None           
+[77] State: NEVER_USED      ID: None       Name: None           
+[78] State: USED            ID: 68         Name: Penny Iolite   
+[79] State: USED            ID: 31         Name: Ella Garnet    
+[80] State: NEVER_USED      ID: None       Name: None           
+[81] State: NEVER_USED      ID: None       Name: None           
+[82] State: NEVER_USED      ID: None       Name: None           
+[83] State: USED            ID: 94         Name: Pat Spinel     
+[84] State: USED            ID: 57         Name: Ethan Datolite 
+[85] State: USED            ID: 20         Name: Tina Gold      
+[86] State: NEVER_USED      ID: None       Name: None           
+[87] State: NEVER_USED      ID: None       Name: None           
+[88] State: NEVER_USED      ID: None       Name: None           
+[89] State: USED            ID: 83         Name: Edgar Peridot  
+[90] State: USED            ID: 46         Name: Tia Bloodstone 
+[91] State: USED            ID: 9          Name: Ivy Black      
+[92] State: NEVER_USED      ID: None       Name: None           
+[93] State: NEVER_USED      ID: None       Name: None           
+[94] State: NEVER_USED      ID: None       Name: None           
+[95] State: USED            ID: 72         Name: Tracy Lapis    
+[96] State: USED            ID: 35         Name: Isla Quartz    
+[97] State: NEVER_USED      ID: None       Name: None           
+[98] State: NEVER_USED      ID: None       Name: None           
+[99] State: NEVER_USED      ID: None       Name: None           
+[100] State: USED            ID: 98         Name: Tara Topaz     
+[101] State: USED            ID: 61         Name: Isaac Garnet   
+[102] State: USED            ID: 24         Name: Xavier Ruby    
+[103] State: NEVER_USED      ID: None       Name: None           
+[104] State: NEVER_USED      ID: None       Name: None           
+[105] State: NEVER_USED      ID: None       Name: None           
+[106] State: USED            ID: 87         Name: Ian Rose       
+[107] State: USED            ID: 50         Name: Xenia Chalcedony
+[108] State: USED            ID: 13         Name: Mia Violet     
+[109] State: NEVER_USED      ID: None       Name: None           
+[110] State: NEVER_USED      ID: None       Name: None           
+[111] State: NEVER_USED      ID: None       Name: None           
+[112] State: USED            ID: 76         Name: Xena Marble    
+[113] State: USED            ID: 39         Name: Maya Tourmaline
+[114] State: USED            ID: 2          Name: Bob Johnson    
+[115] State: NEVER_USED      ID: None       Name: None           
+[116] State: NEVER_USED      ID: None       Name: None           
+[117] State: NEVER_USED      ID: None       Name: None           
+[118] State: USED            ID: 65         Name: Max Hematite   
+[119] State: USED            ID: 28         Name: Ben Beryl      
+[120] State: NEVER_USED      ID: None       Name: None           
+[121] State: NEVER_USED      ID: None       Name: None           
+[122] State: NEVER_USED      ID: None       Name: None           
+[123] State: USED            ID: 91         Name: Mark Serpentine
+[124] State: USED            ID: 54         Name: Bella Corundum 
+[125] State: USED            ID: 17         Name: Quinn Teal     
+[126] State: NEVER_USED      ID: None       Name: None           
+[127] State: NEVER_USED      ID: None       Name: None           
+[128] State: NEVER_USED      ID: None       Name: None           
+[129] State: USED            ID: 80         Name: Beth Onyx      
+[130] State: USED            ID: 43         Name: Quentin Amber  
+[131] State: USED            ID: 6          Name: Frank White    
+[132] State: NEVER_USED      ID: None       Name: None           
+[133] State: NEVER_USED      ID: None       Name: None           
+[134] State: NEVER_USED      ID: None       Name: None           
+[135] State: USED            ID: 69         Name: Quincy Jasper  
+[136] State: USED            ID: 32         Name: Finn Jade      
+[137] State: NEVER_USED      ID: None       Name: None           
+[138] State: NEVER_USED      ID: None       Name: None           
+[139] State: NEVER_USED      ID: None       Name: None           
+[140] State: USED            ID: 95         Name: Quinn Sugilite 
+[141] State: USED            ID: 58         Name: Fiona Demantoid
+[142] State: USED            ID: 21         Name: Uma Silver     
+[143] State: NEVER_USED      ID: None       Name: None           
+[144] State: NEVER_USED      ID: None       Name: None           
+[145] State: NEVER_USED      ID: None       Name: None           
+[146] State: USED            ID: 84         Name: Fay Pyrite     
+[147] State: USED            ID: 47         Name: Ulf Calcite    
+[148] State: USED            ID: 10         Name: Jack Blue      
+[149] State: NEVER_USED      ID: None       Name: None           
+[150] State: NEVER_USED      ID: None       Name: None           
+[151] State: NEVER_USED      ID: None       Name: None           
+[152] State: USED            ID: 73         Name: Ursula Larimar 
+[153] State: USED            ID: 36         Name: Jake Ruby      
+[154] State: NEVER_USED      ID: None       Name: None           
+[155] State: NEVER_USED      ID: None       Name: None           
+[156] State: NEVER_USED      ID: None       Name: None           
+[157] State: USED            ID: 99         Name: Uma Tourmaline 
+[158] State: USED            ID: 62         Name: Jenna Geode    
+[159] State: USED            ID: 25         Name: Yara Sapphire  
+[160] State: NEVER_USED      ID: None       Name: None           
+[161] State: NEVER_USED      ID: None       Name: None           
+[162] State: NEVER_USED      ID: None       Name: None           
+[163] State: USED            ID: 88         Name: Joy Ruby       
+[164] State: USED            ID: 51         Name: Yusuf Chrysolite
+[165] State: USED            ID: 14         Name: Noah Orange    
+[166] State: NEVER_USED      ID: None       Name: None           
+[167] State: NEVER_USED      ID: None       Name: None           
+[168] State: NEVER_USED      ID: None       Name: None           
+[169] State: USED            ID: 77         Name: Yanis Meteorite
+[170] State: USED            ID: 40         Name: Nico Turquoise 
+[171] State: USED            ID: 3          Name: Charlie Brown  
+[172] State: NEVER_USED      ID: None       Name: None           
+[173] State: NEVER_USED      ID: None       Name: None           
+[174] State: NEVER_USED      ID: None       Name: None           
+[175] State: USED            ID: 66         Name: Nora Herkimer  
+[176] State: USED            ID: 29         Name: Chloe Citrine  
+[177] State: NEVER_USED      ID: None       Name: None           
+[178] State: NEVER_USED      ID: None       Name: None           
+[179] State: NEVER_USED      ID: None       Name: None           
+[180] State: USED            ID: 92         Name: Nancy Silver   
+[181] State: USED            ID: 55         Name: Caleb Crocoite 
+[182] State: USED            ID: 18         Name: Rachel Cyan    
+[183] State: NEVER_USED      ID: None       Name: None           
+[184] State: NEVER_USED      ID: None       Name: None           
+[185] State: NEVER_USED      ID: None       Name: None           
+[186] State: USED            ID: 81         Name: Carl Opal      
+[187] State: USED            ID: 44         Name: Ria Aquamarine 
+[188] State: USED            ID: 7          Name: Grace Hall     
+[189] State: NEVER_USED      ID: None       Name: None           
+[190] State: NEVER_USED      ID: None       Name: None           
+[191] State: NEVER_USED      ID: None       Name: None           
+[192] State: USED            ID: 70         Name: Rose Kyanite   
+[193] State: USED            ID: 33         Name: Gia Opal       
+[194] State: NEVER_USED      ID: None       Name: None           
+[195] State: NEVER_USED      ID: None       Name: None           
+[196] State: NEVER_USED      ID: None       Name: None           
+[197] State: USED            ID: 96         Name: Renee Sunstone 
+[198] State: USED            ID: 59         Name: George Epidote 
+[199] State: USED            ID: 22         Name: Victor Bronze  
+[200] State: NEVER_USED      ID: None       Name: None           
+[201] State: NEVER_USED      ID: None       Name: None           
+[202] State: NEVER_USED      ID: None       Name: None           
+[203] State: USED            ID: 85         Name: Gavin Quartz   
+[204] State: USED            ID: 48         Name: Vera Carnelian 
+[205] State: USED            ID: 11         Name: Karen Grey     
+[206] State: NEVER_USED      ID: None       Name: None           
+[207] State: NEVER_USED      ID: None       Name: None           
+[208] State: NEVER_USED      ID: None       Name: None           
+[209] State: USED            ID: 74         Name: Vince Lepidolite
+[210] State: USED            ID: 37         Name: Kira Sapphire  
+-------------------------------
+
+--- Module 2: Searching and Updating ---
+
+  Search for ID 100. Probe sequence: [3]
+  Found patient 100: Victor Turquoise, Age: 33
+  Update for ID 100. Probe sequence: [3]
+  Patient ID 100 record updated successfully at index 3.
+
+  Search for ID 100. Probe sequence: [3]
+  Patient 100 updated in hash table. New urgency level: 2
+
+  Log: Attempting to update record for Patient ID 100 with new urgency 2...
+
+  Log: Searching for old record for Patient ID: 100...
+
+  Search for ID 100. Probe sequence: [3]
+  Old record found for 100: Urgency 2, Current Dept: Emergency, Dest Dept: Laboratories, Proc Time: 105.0
+  Insert for ID 100. Probe sequence: [3]
+  Patient 100 already exists. No new record inserted.
+
+  Log: Patient record for ID 100 updated in patient_table with new urgency 2.
+
+  Log: Calculating Priority for Patient ID 100 (U=2, Current='Emergency', Dest='Laboratories', ProcTime=105.0)...
+  Log: Module 1 returned travel time: 12 minutes for path: Emergency -> Laboratories.
+  Log: Final Priority (U=2, T_travel=12, T_proc=105.0): 12.55
+  Log: Patient ID 100 not found in heap for update, performing a new insertion.
+  Log: Inserted: Patient ID 100 (Prio: 12.55)
+  Log: Patient ID 100 re-inserted with new priority 12.55.
+  Patient 100's priority updated in heap due to urgency change.
+  Remove for ID 104. Probe sequence: [20]
+  Error during Module 2/3 demonstration: Patient with ID 104 not found for removal.
+
+--- Module 3: Priority Heap Operations ---
+
+--- Heap before extractions (Count: 92/160) ---
+Prio: 38.71, Val: 12
+Prio: 36.25, Val: 10
+Prio: 36.33, Val: 16
+Prio: 35.26, Val: 35
+Prio: 34.41, Val: 7
+Prio: 22.18, Val: 13
+Prio: 29.00, Val: 32
+Prio: 24.00, Val: 4
+Prio: 21.54, Val: 2
+Prio: 13.85, Val: 44
+Prio: 28.00, Val: 25
+Prio: 17.93, Val: 3
+Prio: 14.89, Val: 14
+Prio: 27.73, Val: 1
+Prio: 24.81, Val: 6
+Prio: 19.67, Val: 8
+Prio: 12.62, Val: 77
+Prio: 15.93, Val: 41
+Prio: 13.40, Val: 84
+Prio: 13.20, Val: 89
+Prio: 13.55, Val: 94
+Prio: 14.09, Val: 99
+Prio: 19.29, Val: 24
+Prio: 16.50, Val: 27
+Prio: 14.50, Val: 28
+Prio: 14.09, Val: 29
+Prio: 14.09, Val: 59
+Prio: 17.82, Val: 15
+Prio: 21.00, Val: 31
+Prio: 22.83, Val: 33
+Prio: 23.52, Val: 34
+Prio: 13.52, Val: 72
+Prio: 14.17, Val: 74
+Prio: 11.63, Val: 37
+Prio: 12.52, Val: 19
+Prio: 14.52, Val: 79
+Prio: 14.62, Val: 39
+Prio: 13.35, Val: 42
+Prio: 12.62, Val: 87
+Prio: 12.53, Val: 11
+Prio: 12.09, Val: 45
+Prio: 12.13, Val: 47
+Prio: 12.47, Val: 92
+Prio: 12.55, Val: 97
+Prio: 13.55, Val: 49
+Prio: 12.55, Val: 100
+Prio: 12.70, Val: 52
+Prio: 10.20, Val: 53
+Prio: 14.09, Val: 54
+Prio: 12.01, Val: 55
+Prio: 10.52, Val: 56
+Prio: 12.55, Val: 57
+Prio: 11.35, Val: 58
+Prio: 11.33, Val: 30
+Prio: 10.09, Val: 61
+Prio: 13.09, Val: 62
+Prio: 10.62, Val: 63
+Prio: 14.52, Val: 64
+Prio: 11.20, Val: 65
+Prio: 9.93, Val: 66
+Prio: 13.01, Val: 67
+Prio: 10.47, Val: 68
+Prio: 13.62, Val: 69
+Prio: 11.69, Val: 17
+Prio: 12.01, Val: 70
+Prio: 8.46, Val: 36
+Prio: 10.13, Val: 73
+Prio: 11.62, Val: 75
+Prio: 9.40, Val: 76
+Prio: 11.43, Val: 38
+Prio: 11.01, Val: 78
+Prio: 11.33, Val: 20
+Prio: 12.52, Val: 80
+Prio: 9.13, Val: 81
+Prio: 10.62, Val: 83
+Prio: 4.19, Val: 21
+Prio: 11.62, Val: 85
+Prio: 10.01, Val: 86
+Prio: 11.09, Val: 43
+Prio: 11.52, Val: 88
+Prio: 11.81, Val: 22
+Prio: 11.93, Val: 90
+Prio: 10.01, Val: 91
+Prio: 9.55, Val: 46
+Prio: 10.20, Val: 93
+Prio: 10.77, Val: 23
+Prio: 11.13, Val: 95
+Prio: 10.52, Val: 96
+Prio: 11.52, Val: 48
+Prio: 11.35, Val: 98
+Prio: 13.49, Val: 5
+Prio: 9.20, Val: 51
+--- End Heap State ---
+
+  Extracting 3 highest priority patients:
+  Log: Extracted: Patient ID 12 (Prio: 38.71)
+
+  Search for ID 12. Probe sequence: [51]
+  Extracted Patient ID: 12, Name: Liam Red, Prio: 38.71, Current Dept: Radiology
+  Log: Extracted: Patient ID 16 (Prio: 36.33)
+
+  Search for ID 16. Probe sequence: [68]
+  Extracted Patient ID: 16, Name: Peter Pink, Prio: 36.33, Current Dept: Outpatient Units
+  Log: Extracted: Patient ID 10 (Prio: 36.25)
+
+  Search for ID 10. Probe sequence: [148]
+  Extracted Patient ID: 10, Name: Jack Blue, Prio: 36.25, Current Dept: ICU
+
+--- Heap after extractions (Count: 89/160) ---
+Prio: 35.26, Val: 35
+Prio: 34.41, Val: 7
+Prio: 29.00, Val: 32
+Prio: 24.00, Val: 4
+Prio: 28.00, Val: 25
+Prio: 22.18, Val: 13
+Prio: 27.73, Val: 1
+Prio: 19.67, Val: 8
+Prio: 21.54, Val: 2
+Prio: 13.85, Val: 44
+Prio: 19.29, Val: 24
+Prio: 17.93, Val: 3
+Prio: 14.89, Val: 14
+Prio: 21.00, Val: 31
+Prio: 24.81, Val: 6
+Prio: 14.17, Val: 74
+Prio: 12.62, Val: 77
+Prio: 15.93, Val: 41
+Prio: 13.40, Val: 84
+Prio: 13.20, Val: 89
+Prio: 13.55, Val: 94
+Prio: 14.09, Val: 99
+Prio: 12.70, Val: 52
+Prio: 16.50, Val: 27
+Prio: 14.50, Val: 28
+Prio: 14.09, Val: 29
+Prio: 14.09, Val: 59
+Prio: 17.82, Val: 15
+Prio: 14.52, Val: 64
+Prio: 22.83, Val: 33
+Prio: 23.52, Val: 34
+Prio: 13.52, Val: 72
+Prio: 13.49, Val: 5
+Prio: 11.63, Val: 37
+Prio: 12.52, Val: 19
+Prio: 14.52, Val: 79
+Prio: 14.62, Val: 39
+Prio: 13.35, Val: 42
+Prio: 12.62, Val: 87
+Prio: 12.53, Val: 11
+Prio: 12.09, Val: 45
+Prio: 12.13, Val: 47
+Prio: 12.47, Val: 92
+Prio: 12.55, Val: 97
+Prio: 13.55, Val: 49
+Prio: 12.55, Val: 100
+Prio: 11.35, Val: 98
+Prio: 10.20, Val: 53
+Prio: 14.09, Val: 54
+Prio: 12.01, Val: 55
+Prio: 10.52, Val: 56
+Prio: 12.55, Val: 57
+Prio: 11.35, Val: 58
+Prio: 11.33, Val: 30
+Prio: 10.09, Val: 61
+Prio: 13.09, Val: 62
+Prio: 10.62, Val: 63
+Prio: 9.20, Val: 51
+Prio: 11.20, Val: 65
+Prio: 9.93, Val: 66
+Prio: 13.01, Val: 67
+Prio: 10.47, Val: 68
+Prio: 13.62, Val: 69
+Prio: 11.69, Val: 17
+Prio: 12.01, Val: 70
+Prio: 8.46, Val: 36
+Prio: 10.13, Val: 73
+Prio: 11.62, Val: 75
+Prio: 9.40, Val: 76
+Prio: 11.43, Val: 38
+Prio: 11.01, Val: 78
+Prio: 11.33, Val: 20
+Prio: 12.52, Val: 80
+Prio: 9.13, Val: 81
+Prio: 10.62, Val: 83
+Prio: 4.19, Val: 21
+Prio: 11.62, Val: 85
+Prio: 10.01, Val: 86
+Prio: 11.09, Val: 43
+Prio: 11.52, Val: 88
+Prio: 11.81, Val: 22
+Prio: 11.93, Val: 90
+Prio: 10.01, Val: 91
+Prio: 9.55, Val: 46
+Prio: 10.20, Val: 93
+Prio: 10.77, Val: 23
+Prio: 11.13, Val: 95
+Prio: 10.52, Val: 96
+Prio: 11.52, Val: 48
+--- End Heap State ---
+
+--- Module 1: Graph Pathfinding and Traversal ---
+  Shortest path from Emergency to Operating Theatres: Emergency -> Laboratories -> ICU -> Operating Theatres (18 minutes)
+
+BFS from 'Emergency': Reachable departments by level:
+Level 0: Emergency
+Level 1: Laboratories, Radiology
+Level 2: ICU, Pharmacy, Wards
+Level 3: Operating Theatres
+
+DFS from 'Emergency': Cycle Detection:
+Cycles detected (5 unique cycles):
+  Cycle 1: ICU, Laboratories, Pharmacy
+  Cycle 2: ICU, Pharmacy, Wards
+  Cycle 3: ICU, Laboratories, Pharmacy, Wards
+  Cycle 4: Emergency, ICU, Laboratories, Pharmacy, Radiology, Wards
+  Cycle 5: ICU, Laboratories, Pharmacy, Radiology, Wards
+
+--- Module 4: Sorting Benchmarking (Expected Treatment Time for 'Under Treatment' Patients) ---
+  Benchmarking sorting for 91 'Under Treatment' patients based on ExpectedTreatmentTime.
+
+  Original (first 5 patients with ETT):
+    ID 1: 44.0 min
+    ID 2: 57.0 min
+    ID 3: 67.0 min
+    ID 4: 50.0 min
+    ID 5: 87.0 min
+
+  Merge Sort completed in 0.000225 seconds.
+  Sorted by Merge Sort (first 5 patients with ETT):
+    ID 12: 28.0 min
+    ID 16: 30.0 min
+    ID 35: 31.0 min
+    ID 10: 32.0 min
+    ID 7: 34.0 min
+
+  Quick Sort (Median-of-Three) completed in 0.000121 seconds.
+  Sorted by Quick Sort (first 5 patients with ETT):
+    ID 12: 28.0 min
+    ID 16: 30.0 min
+    ID 35: 31.0 min
+    ID 10: 32.0 min
+    ID 7: 34.0 min
+
+Sorting benchmark summary:
+  Merge Sort Time: 0.000225 s
+  Quick Sort Time: 0.000121 s
+
+--- Outputting sorted patients to 'sorted_under_treatment_patients.csv' ---
+Successfully wrote 91 sorted patients to 'sorted_under_treatment_patients.csv'.
+
+--- Integrated Test Case Finished ---
