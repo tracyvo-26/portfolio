@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tracy Vo — Data Science Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Tokens ── */
+  :root {
+    --navy:    #1F3864;
+    --navy-lt: #2E5F8A;
+    --gold:    #C8A951;
+    --gold-lt: #FFF8E7;
+    --page:    #F6F7F9;
+    --card:    #FFFFFF;
+    --border:  #E4E7ED;
+    --text:    #1A1A2E;
+    --muted:   #6B7280;
+    --accent:  #2563EB;
+    --radius:  10px;
+    --shadow:  0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--page);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Nav ── */
+  nav {
+    background: var(--navy);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%);
+    padding: 56px 32px 48px;
+    color: #fff;
+  }
+  .hero-inner { max-width: 800px; margin: 0 auto; }
+  .hero h1 { font-size: 32px; font-weight: 600; line-height: 1.2; }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 10px;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+  .stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius);
+    padding: 10px 18px;
+    text-align: center;
+    min-width: 80px;
+  }
+  .stat-val { font-size: 18px; font-weight: 600; color: var(--gold); }
+  .stat-lbl { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+  /* ── Tabs ── */
+  .tabs-wrapper {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+  }
+  .tabs {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 24px;
+    gap: 4px;
+  }
+  .tab-btn {
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab-btn:hover { color: var(--navy); }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+  .tab-btn svg { width: 15px; height: 15px; }
+
+  /* ── Content ── */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  /* ── Project grid ── */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .project-grid.full { grid-template-columns: 1fr; }
+
+  /* ── Project card ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  /* Card thumbnail */
+  .card-thumb {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+  .card-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .thumb-navy    { background: linear-gradient(135deg, #1F3864 0%, #2E5F8A 100%); }
+  .thumb-teal    { background: linear-gradient(135deg, #0F4C5C 0%, #1A7A8A 100%); }
+  .thumb-green   { background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%); }
+  .thumb-brown   { background: linear-gradient(135deg, #3D2B1F 0%, #6B4226 100%); }
+  .thumb-purple  { background: linear-gradient(135deg, #2D1B69 0%, #4C3494 100%); }
+
+  .thumb-icon { font-size: 36px; opacity: 0.8; }
+  .thumb-kpis {
+    display: flex;
+    gap: 10px;
+  }
+  .thumb-kpi {
+    text-align: center;
+    background: rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 6px 12px;
+  }
+  .thumb-kpi-val { font-size: 14px; font-weight: 600; color: var(--gold); }
+  .thumb-kpi-lbl { font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 1px; }
+
+  /* Card body */
+  .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+  .card-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .card-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 2px 9px;
+    background: #EEF2FF;
+    color: #3730A3;
+  }
+  .tag-gold { background: var(--gold-lt); color: #92620A; }
+  .tag-green { background: #ECFDF5; color: #065F46; }
+
+  /* Card footer */
+  .card-footer {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .card-meta { font-size: 11px; color: var(--muted); }
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    transition: background 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .btn-link:hover { background: var(--page); border-color: var(--navy); }
+  .btn-link svg { width: 13px; height: 13px; }
+
+  /* ── Wide card (featured) ── */
+  .card-wide {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+  .card-wide .card-thumb { width: 240px; height: auto; flex-shrink: 0; }
+  .card-wide .card-body { border-left: 1px solid var(--border); }
+  @media (max-width: 600px) {
+    .card-wide { flex-direction: column; }
+    .card-wide .card-thumb { width: 100%; height: 140px; }
+    .card-wide .card-body { border-left: none; border-top: 1px solid var(--border); }
+  }
+
+  /* ── About tab ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-section { margin-bottom: 24px; }
+  .about-section h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .edu-item { margin-bottom: 14px; }
+  .edu-degree { font-size: 13px; font-weight: 500; color: var(--text); }
+  .edu-uni { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .edu-note { font-size: 11px; color: var(--accent); margin-top: 2px; font-weight: 500; }
+  .skill-group { margin-bottom: 14px; }
+  .skill-group-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skill-pill {
+    font-size: 12px;
+    background: var(--page);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 11px;
+    color: var(--text);
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-icon { font-size: 16px; width: 20px; text-align: center; }
+  .contact-label { color: var(--muted); min-width: 70px; }
+  .contact-value { color: var(--text); font-weight: 500; }
+  .contact-value a { color: var(--accent); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  /* ── Icon SVGs inline ── */
+  .icon { display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Tracy <span>Vo</span></div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Data Science <span>&amp; Analytics</span> Portfolio</h1>
+    <p class="subtitle">
+      Postgraduate student at Curtin University building dashboards, machine learning models
+      and algorithmic systems that turn data into decisions.
+    </p>
+    <div class="stats">
+      <div class="stat"><div class="stat-val">82</div><div class="stat-lbl">WAM / 100</div></div>
+      <div class="stat"><div class="stat-val">5</div><div class="stat-lbl">Projects</div></div>
+      <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Dashboards</div></div>
+      <div class="stat"><div class="stat-val">Nov 26</div><div class="stat-lbl">Graduation</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrapper" id="projects">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('powerbi', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+      Power BI Dashboards
+    </button>
+    <button class="tab-btn" onclick="switchTab('python', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      Python &amp; ML
+    </button>
+    <button class="tab-btn" onclick="switchTab('dsa', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12H3M21 12h-2M12 3V1M12 23v-2M7.05 7.05 5.64 5.64M18.36 18.36l-1.41-1.41M7.05 16.95l-1.41 1.41M18.36 5.64l-1.41 1.41"/><circle cx="12" cy="12" r="4"/></svg>
+      Data Structures
+    </button>
+    <button class="tab-btn" onclick="switchTab('about', this)" id="about">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      About
+    </button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ══ POWER BI TAB ══════════════════════════════════════════════════════ -->
+  <div class="tab-panel active" id="tab-powerbi">
+    <p class="section-label">Business Intelligence · 3 projects</p>
+    <div class="project-grid">
+
+      <!-- ── ADD NEW POWER BI PROJECT: copy one <div class="card"> block ── -->
+
+      <!-- AtliQ Hotels — featured wide card -->
+      <div class="card card-wide">
+        <div class="card-thumb thumb-navy">
+          <!-- Replace with: <img src="assets/screenshots/atliq-p1.png" alt="AtliQ Hotels dashboard"> -->
+          <div class="card-thumb-placeholder">
+            <div class="thumb-kpis">
+              <div class="thumb-kpi"><div class="thumb-kpi-val">$1.64bn</div><div class="thumb-kpi-lbl">Revenue</div></div>
+              <div class="thumb-kpi"><div class="thumb-kpi-val">24.8%</div><div class="thumb-kpi-lbl">Cancellation</div></div>
+              <div class="thumb-kpi"><div class="thumb-kpi-val">57.9%</div><div class="thumb-kpi-lbl">Occupancy</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">AtliQ Hotels Performance Report</div>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">DAX</span>
+            <span class="tag">Power Query</span>
+            <span class="tag">Scatter analysis</span>
+            <span class="tag tag-gold">3-page dashboard</span>
+          </div>
+          <div class="card-desc">
+            Comprehensive hospitality BI dashboard covering $1.64bn revenue across 7 properties
+            and 4 Indian cities (May–July 2022). Features RevPAR vs occupancy scatter analysis,
+            ADR pricing diagnosis and structural cancellation behaviour investigation.
+            Accompanied by a full 6-section analysis report with strategic recommendations.
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-meta">Hospitality · 2026</span>
+          <div style="display:flex;gap:8px;">
+            <a href="https://github.com/tracyvo-26/portfolio/blob/main/assets/pdfs/AtliQ%20Hotel.pdf" target="_blank" class="btn-link">
+              View project
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FreshMart -->
+      <div class="card">
+        <div class="card-thumb thumb-teal">
+          <!-- Replace with: <img src="assets/screenshots/freshmart.png" alt="FreshMart dashboard"> -->
+          <div class="card-thumb-placeholder">
+            <div class="thumb-kpis">
+              <div class="thumb-kpi"><div class="thumb-kpi-val">$321K</div><div class="thumb-kpi-lbl">Revenue</div></div>
+              <div class="thumb-kpi"><div class="thumb-kpi-val">28.7%</div><div class="thumb-kpi-lbl">Margin</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">FreshMart Sales Performance Dashboard</div>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">Time intelligence</span>
+            <span class="tag tag-gold">Grade: 88 · HD</span>
+          </div>
+          <div class="card-desc">
+            Retail executive dashboard with YTD vs prior-YTD revenue comparison, product
+            profitability matrix by category, and store branch performance ranking.
+            Built for ISYS6013 — achieved High Distinction.
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-meta">Retail · ISYS6013 · 2025</span>
+          <a href="https://github.com/tracyvo-26/portfolio/blob/main/assets/pdfs/Freshmart%20(Retail).pdf" target="_blank" class="btn-link">
+            View project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Renewable Energy -->
+      <div class="card">
+        <div class="card-thumb thumb-green">
+          <!-- Replace with: <img src="assets/screenshots/renewable.png" alt="Renewable energy dashboard"> -->
+          <div class="card-thumb-placeholder">
+            <div class="thumb-kpis">
+              <div class="thumb-kpi"><div class="thumb-kpi-val">10.8%</div><div class="thumb-kpi-lbl">CAGR</div></div>
+              <div class="thumb-kpi"><div class="thumb-kpi-val">~169K</div><div class="thumb-kpi-lbl">GWh 2035</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Australia Renewable Energy Transition 2005–2035</div>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">Forecasting</span>
+            <span class="tag">Time series</span>
+            <span class="tag tag-gold">Grade: 88 · HD</span>
+          </div>
+          <div class="card-desc">
+            Data storytelling dashboard tracking Australia's renewable energy share from 7% to 43%
+            over 20 years, with CAGR-based forecast to 2035. Multi-country comparison against
+            Denmark, Germany and the UK.
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-meta">Energy · ISYS6013 · 2025</span>
+          <a href="https://github.com/tracyvo-26/portfolio/blob/main/assets/pdfs/Australian%20Renewable%20Energy.pdf" target="_blank" class="btn-link">
+            View project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /project-grid -->
+  </div><!-- /tab-powerbi -->
+
+
+  <!-- ══ PYTHON & ML TAB ═══════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-python">
+    <p class="section-label">Machine Learning · Python · 2 projects</p>
+    <div class="project-grid">
+
+      <!-- ── ADD NEW PYTHON PROJECT: copy one <div class="card"> block ── -->
+
+      <!-- BLEVE — featured wide card -->
+      <div class="card card-wide">
+        <div class="card-thumb thumb-brown">
+          <!-- Replace with: <img src="assets/screenshots/bleve.png" alt="BLEVE project"> -->
+          <div class="card-thumb-placeholder">
+            <div class="thumb-kpis">
+              <div class="thumb-kpi"><div class="thumb-kpi-val">0.1103</div><div class="thumb-kpi-lbl">OOF MAPE</div></div>
+              <div class="thumb-kpi"><div class="thumb-kpi-val">0.9608</div><div class="thumb-kpi-lbl">R²</div></div>
+              <div class="thumb-kpi"><div class="thumb-kpi-val">5-fold</div><div class="thumb-kpi-lbl">CV</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">BLEVE Tank Explosion — Blast Pressure Prediction</div>
+          <div class="tags">
+            <span class="tag">CatBoost</span>
+            <span class="tag">XGBoost</span>
+            <span class="tag">LightGBM</span>
+            <span class="tag">SHAP</span>
+            <span class="tag">Feature engineering</span>
+            <span class="tag tag-gold">Kaggle · COMP6013</span>
+          </div>
+          <div class="card-desc">
+            Predicted peak blast overpressure from industrial tank explosions using a K-Fold
+            weighted ensemble of gradient boosting models. CatBoost achieved MAPE 0.1103 and
+            R² 0.9608. Full SHAP explainability analysis identifies sensor wall position as
+            the dominant moderating variable across all spatial and physical features.
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-meta">ML · Industrial safety · COMP6013 · 2026</span>
+          <a href="https://github.com/tracyvo-26/portfolio/tree/main/bleve-explosion" target="_blank" class="btn-link">
+            View notebook
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Classification model -->
+      <div class="card">
+        <div class="card-thumb thumb-purple">
+          <!-- Replace with: <img src="assets/screenshots/classification.png" alt="Classification model"> -->
+          <div class="card-thumb-placeholder">
+            <div class="thumb-kpis">
+              <div class="thumb-kpi"><div class="thumb-kpi-val">80</div><div class="thumb-kpi-lbl">Unit grade</div></div>
+              <div class="thumb-kpi"><div class="thumb-kpi-val">CV</div><div class="thumb-kpi-lbl">Validated</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Patient Outcome Classification Model</div>
+          <div class="tags">
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">Python</span>
+            <span class="tag">EDA</span>
+            <span class="tag tag-gold">COMP5009 · Grade: 80</span>
+          </div>
+          <div class="card-desc">
+            End-to-end classification pipeline on a structured medical dataset. Covers data
+            inspection, missing value imputation, feature engineering, model selection and
+            cross-validated performance evaluation.
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-meta">ML · COMP5009 · 2025</span>
+          <a href="https://github.com/tracyvo-26/portfolio/tree/main/patient-classification" target="_blank" class="btn-link">
+            View notebook
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /project-grid -->
+  </div><!-- /tab-python -->
+
+
+  <!-- ══ DSA TAB ═══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-dsa">
+    <p class="section-label">Data Structures &amp; Algorithms · 1 project</p>
+    <div class="project-grid full">
+
+      <!-- ── ADD NEW DSA PROJECT: copy one <div class="card"> block ── -->
+
+      <!-- Hospital DSA -->
+      <div class="card card-wide">
+        <div class="card-thumb thumb-navy" style="width:280px;">
+          <!-- Replace with: <img src="assets/screenshots/hospital-dsa.png" alt="Hospital DSA"> -->
+          <div class="card-thumb-placeholder" style="gap:10px;">
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:0.05em;">A* PATHFINDING</div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;padding:0 12px;">
+              <span style="background:rgba(200,169,81,0.25);color:var(--gold);font-size:10px;padding:3px 8px;border-radius:4px;">Emergency</span>
+              <span style="color:rgba(255,255,255,0.3);font-size:10px;">→</span>
+              <span style="background:rgba(200,169,81,0.25);color:var(--gold);font-size:10px;padding:3px 8px;border-radius:4px;">Radiology</span>
+              <span style="color:rgba(255,255,255,0.3);font-size:10px;">→</span>
+              <span style="background:rgba(200,169,81,0.25);color:var(--gold);font-size:10px;padding:3px 8px;border-radius:4px;">ICU</span>
+            </div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.35);">Merge Sort · Quick Sort · Linked List</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Hospital Patient Management System</div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Graph · A*</span>
+            <span class="tag">Merge sort</span>
+            <span class="tag">Quick sort</span>
+            <span class="tag">Linked list</span>
+            <span class="tag tag-gold">COMP5008 · Grade: 97 · HD</span>
+          </div>
+          <div class="card-desc">
+            A full hospital patient management system built from scratch using custom data structures
+            — no Python built-ins used. Features an A* pathfinding graph across 8 hospital departments,
+            a doubly-linked patient list, and a benchmarking suite comparing Merge Sort vs
+            Quicksort (Median-of-Three) across 3 dataset sizes and 3 conditions.
+            Achieved the highest grade in the unit at 97.
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-meta">DSA · COMP5008 · 2025</span>
+          <a href="https://github.com/tracyvo-26/portfolio/tree/main/hospital-dsa" target="_blank" class="btn-link">
+            View source code
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /project-grid -->
+  </div><!-- /tab-dsa -->
+
+
+  <!-- ══ ABOUT TAB ═════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-about">
+    <div class="about-grid">
+
+      <div>
+        <div class="about-section">
+          <h3>About</h3>
+          <p style="font-size:13px;color:var(--muted);line-height:1.8;">
+            I am a postgraduate Data Science student at Curtin University with a strong
+            foundation in quantitative analysis, business intelligence and machine learning.
+            My background in Economics and Finance from RMIT means I connect data findings
+            to real business decisions — not just model outputs.
+            <br><br>
+            I am fluent in English and Vietnamese with conversational Mandarin, pursuing
+            a long-term career in data science with plans to undertake a PhD.
+          </p>
+        </div>
+
+        <div class="about-section">
+          <h3>Education</h3>
+          <div class="edu-item">
+            <div class="edu-degree">Master of Predictive Analytics (Data Science)</div>
+            <div class="edu-uni">Curtin University, Perth · Feb 2025 – Nov 2026</div>
+            <div class="edu-note">WAM: 82 / 100 · Good Standing</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">Bachelor of Economics and Finance</div>
+            <div class="edu-uni">RMIT University, Ho Chi Minh City · Jun 2021 – Jun 2024</div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h3>Contact</h3>
+          <div class="contact-item">
+            <span class="contact-icon">✉</span>
+            <span class="contact-label">Email</span>
+            <span class="contact-value"><a href="mailto:thuytramvo@gmail.com">thuytramvo@gmail.com</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📱</span>
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">0418 269 814</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <span class="contact-label">Location</span>
+            <span class="contact-value">Perth, WA, Australia</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💼</span>
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value"><a href="https://linkedin.com/in/tracyvo" target="_blank">linkedin.com/in/tracyvo</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🐙</span>
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value"><a href="https://github.com/tracyvo-26" target="_blank">github.com/tracyvo-26</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="about-section">
+          <h3>Skills</h3>
+          <div class="skill-group">
+            <div class="skill-group-label">Data &amp; Analytics</div>
+            <div class="skill-pills">
+              <span class="skill-pill">Power BI</span>
+              <span class="skill-pill">DAX</span>
+              <span class="skill-pill">Power Query</span>
+              <span class="skill-pill">SQL</span>
+              <span class="skill-pill">Excel</span>
+              <span class="skill-pill">Data modelling</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Machine Learning</div>
+            <div class="skill-pills">
+              <span class="skill-pill">XGBoost</span>
+              <span class="skill-pill">LightGBM</span>
+              <span class="skill-pill">CatBoost</span>
+              <span class="skill-pill">Scikit-learn</span>
+              <span class="skill-pill">SHAP</span>
+              <span class="skill-pill">Feature engineering</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Programming</div>
+            <div class="skill-pills">
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">R</span>
+              <span class="skill-pill">SQL</span>
+              <span class="skill-pill">Git</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Languages</div>
+            <div class="skill-pills">
+              <span class="skill-pill">English (fluent)</span>
+              <span class="skill-pill">Vietnamese (native)</span>
+              <span class="skill-pill">Mandarin (conversational)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h3>Coursework Highlights</h3>
+          <table style="width:100%;font-size:12px;border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:6px 0;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);">Unit</th>
+                <th style="text-align:right;padding:6px 0;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);">Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- ── ADD MORE UNITS HERE ── -->
+              <tr><td style="padding:7px 0;border-bottom:1px solid var(--border);color:var(--text);">Data Structures &amp; Algorithms</td><td style="text-align:right;padding:7px 0;border-bottom:1px solid var(--border);color:var(--accent);font-weight:500;">97 · HD</td></tr>
+              <tr><td style="padding:7px 0;border-bottom:1px solid var(--border);color:var(--text);">Business Intelligence &amp; Analytics</td><td style="text-align:right;padding:7px 0;border-bottom:1px solid var(--border);color:var(--accent);font-weight:500;">~87 · HD</td></tr>
+              <tr><td style="padding:7px 0;border-bottom:1px solid var(--border);color:var(--text);">Business Quantitative Techniques</td><td style="text-align:right;padding:7px 0;border-bottom:1px solid var(--border);color:var(--accent);font-weight:500;">86 · D</td></tr>
+              <tr><td style="padding:7px 0;border-bottom:1px solid var(--border);color:var(--text);">Mathematical Statistics</td><td style="text-align:right;padding:7px 0;border-bottom:1px solid var(--border);color:var(--accent);font-weight:500;">~84 · D</td></tr>
+              <tr><td style="padding:7px 0;border-bottom:1px solid var(--border);color:var(--text);">Data Mining</td><td style="text-align:right;padding:7px 0;border-bottom:1px solid var(--border);color:var(--accent);font-weight:500;">81 · D</td></tr>
+              <tr><td style="padding:7px 0;color:var(--text);">Decision Methods &amp; Predictive Analytics</td><td style="text-align:right;padding:7px 0;color:var(--accent);font-weight:500;">81 · D</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /about-grid -->
+  </div><!-- /tab-about -->
+
+</div><!-- /content -->
+
+<script>
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
