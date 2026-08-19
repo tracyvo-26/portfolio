@@ -3,12 +3,7 @@
 Portfolio website hosted on GitHub Pages.
 
 ## Live site
-https://YOUR_USERNAME.github.io/portfolio
-
-## How to deploy
-1. Push this folder to a GitHub repo named `portfolio`
-2. Go to Settings > Pages > Source: Deploy from branch `main`, folder `/root`
-3. Site is live in ~60 seconds
+https://tracyvo-26.github.io/portfolio
 
 ## How to add a new project
 
@@ -25,9 +20,6 @@ Copy the nearest card block and update the title, tags, description and link.
 2. Save to `assets/screenshots/your-project-name.png`
 3. In the card, replace the placeholder div with:
    `<img src="assets/screenshots/your-project-name.png" alt="Your project">`
-
-### Update the GitHub link
-Replace `YOUR_USERNAME` with your actual GitHub username in all `href` attributes.
 
 ## File structure
 ```
