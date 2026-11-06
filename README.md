@@ -5,30 +5,14 @@ Portfolio website hosted on GitHub Pages.
 ## Live site
 https://tracyvo-26.github.io/portfolio
 
-## How to add a new project
-
-### Add a card to the HTML
-Open `index.html` and find the comment:
-- `<!-- ── ADD NEW POWER BI PROJECT: copy one <div class="card"> block ── -->`
-- `<!-- ── ADD NEW PYTHON PROJECT: copy one <div class="card"> block ── -->`
-- `<!-- ── ADD NEW DSA PROJECT: copy one <div class="card"> block ── -->`
-
-Copy the nearest card block and update the title, tags, description and link.
-
-### Add a screenshot (optional but recommended)
-1. Export a screenshot of your dashboard as PNG
-2. Save to `assets/screenshots/your-project-name.png`
-3. In the card, replace the placeholder div with:
-   `<img src="assets/screenshots/your-project-name.png" alt="Your project">`
-
 ## File structure
 ```
 portfolio/
-├── index.html              ← main site (edit this)
+├── index.html              
 ├── README.md
 └── assets/
-    ├── screenshots/        ← put PNG screenshots here
-    └── pdfs/               ← put PDF reports here
+    ├── screenshots/        
+    └── pdfs/              
 ```
 
 ## Project repos structure (separate repos or folders)
